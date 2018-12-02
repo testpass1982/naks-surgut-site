@@ -1,0 +1,504 @@
+{% load static %}
+<!-- Services block -->
+
+<div class="block__uslugi">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <p class="header__uslugi ">Услуги Центра</p>
+      </div>
+    </div>
+
+    <!-- services block 1 -->
+
+    <div class="box__uslug">
+      <div class="row d-flex">
+        <div class="col-sm-4 col-xl-2">
+          <div class="block__uslug__one">
+            <a href="attestat-svarshik-specialist.html#specialist-block">
+              <ul class="specialist__block">
+                <img src="{% static 'img/icon-01.png' %}" class="mask__1" alt="">
+                <li>
+                  Аттестация сварщиков <br>
+                  и специалистов сварочного <br>
+                  производства
+                </li>
+              </ul>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-sm-4 col-xl-2">
+          <div class="block__uslug__one">
+            <a href="#">
+              <ul class="specialist__block">
+                <img src="{% static 'img/icon-02.png' %}" class="mask__1" alt="">
+                <li>
+                  Оценка <br>
+                  квалификаций
+                </li>
+              </ul>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-sm-4 col-xl-2">
+          <div class="block__uslug__one">
+            <a href="#">
+              <ul class="specialist__block">
+                <img src="{% static 'img/icon-06.png' %}" class="mask__1" alt="">
+                <li>
+                  Неразрушающий <br>
+                  контроль
+                </li>
+              </ul>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-sm-4 col-xl-2">
+          <div class="block__uslug__one">
+            <a href="#">
+              <ul class="specialist__block">
+                <img src="{% static 'img/icon-03.png' %}" class="mask__1" alt="">
+                <li>
+                  Аттестация сварочного <br>
+                  оборудования
+                </li>
+              </ul>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-sm-4 col-xl-2">
+          <div class="block__uslug__one">
+            <a href="#">
+              <ul class="specialist__block">
+                <img src="{% static 'img/icon-04.png' %}" class="mask__1" alt="">
+                <li>
+                  Экспертиза промышленной <br>
+                  безопасности
+                </li>
+              </ul>
+            </a>
+          </div>
+        </div>
+
+
+        <!-- </div> -->
+
+        <!-- </div> -->
+
+        <!-- <div class="box__uslug__two  "> -->
+        <!-- <div class="row d-flex"> -->
+        <div class="col-sm-4 col-xl-2">
+          <div class="block__uslug__one">
+            <a href="#">
+              <ul class="specialist__block">
+                <img src="{% static 'img/icon-09.png' %}" class="mask__1" alt="">
+                <li>
+                  Разрушающий <br>
+                  контроль
+                </li>
+              </ul>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-sm-4 col-xl-2">
+          <div class="block__uslug__one">
+            <a href="#">
+              <ul class="specialist__block">
+                <img src="{% static 'img/icon-05.png' %}" class="mask__1" alt="">
+                <li>
+                  Специальная подготовка <br>
+                  сварщиков и специалистов <br>
+                  сварочного производства
+                </li>
+              </ul>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-sm-4 col-xl-2">
+          <div class="block__uslug__one">
+            <a href="#">
+              <ul class="specialist__block">
+                <img src="{% static 'img/icon-08.png' %}" class="mask__1" alt="">
+                <li>
+                  Аттестация сварочных <br>
+                  материалов
+                </li>
+              </ul>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-sm-4 col-xl-2">
+          <div class="block__uslug__one">
+            <a href="#">
+              <ul class="specialist__block">
+                <img src="{% static 'img/icon-07.png' %}" class="mask__1" alt="">
+                <li>
+                  Аттестация сварочных <br>
+                  технологий
+                </li>
+              </ul>
+            </a>
+          </div>
+        </div>
+
+
+
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+</div>
+
+<!-- services block and -->
+
+<!-- NEWS BLOCK -->
+<div class="news__block">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p class="news__header__content">Новости
+          <a href="{% url 'news' %}" class="all__news float-right">
+            Все новости <img src="{% static 'img/arrow__next-01.png' %}" alt="">
+          </a>
+        </p>
+      </div>
+    </div>
+
+
+
+    <div class="row">
+
+      {% if posts %}
+      {% for post, picture in posts.items %}
+      <div class="col-xs-12 col-xl-6 col-md-6">
+
+        <a href="{% url 'news' %}">
+          <div class="block__news__one">
+            <div class="block__img__news" style="background: url({{ picture.image.url }}) no-repeat;
+                                                       background-size: cover;">
+              <div class="block__news__box">
+                <div class="date">
+                  <p class="date__number text-right">
+                    {{ post.published_date }}</p>
+                </div>
+                {% for tag in post.tags.all %}
+                <p class="naks__news__tag text-right">{{ tag.name }}</p>
+                {% endfor %}
+                <div class="die__for__text">
+                  <p class="text__to__news">
+                    {{ post.title }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="col-xs-12 col-xl-6 col-md-6">
+
+        <a href="{% url 'news' %}#news__box">
+          <div class="block__news__one">
+            <div class="block__img__news">
+              <div class="block__news__box">
+                <div class="date">
+                  <p class="date__number text-right">
+                    10 Июля<br> 2018 </p>
+                </div>
+                <p class="naks__news__tag text-right">Новости НАКС</p>
+                <div class="die__for__text">
+                  <p class="text__to__news">
+                    Соглашение о сотрудничестве между СРО НП "НАКС" и CNPC INTERNATIONAL WELDING TRAINING CENTER
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-xs-12 col-xl-6 col-md-6">
+        <a href="">
+          <div class="block__news__two ">
+            <div class="block__img__news__two">
+              <div class="block__news__box__two">
+                <div class="date">
+                  <p class="date__number text-right">
+                    12 Июля<br> 2018 </p>
+                </div>
+                <p class="naks__news__tag text-right">Новости НАКС</p>
+                <div class="die__for__text__two">
+                  <p class="text__to__news__two">
+                    Руководство НАКС в Рязани
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+
+<div class="news__block__two">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <p class="recent__news__content">Недавние новости</p>
+      </div>
+    </div>
+    <div class="row">
+      {% if secondery_news %}
+
+      {% for secondery in secondery_news %}
+      <div class="col-xs-12  col-md-6 col-lg-6 col-xl-3">
+        <div class="block__agreements ">
+          <div class="date">
+            <p class="date__number__two text-left">
+              {{ secondery.date }} </p>
+            {% for tag in secondery.tags.all %}
+            <p class="naks__news__tag__two text-right">
+              {{ tag.name }}</p>
+            {% endfor %}
+          </div>
+          <div class="block__agreements__text">
+            <p class="agreements__header__text">
+              {{ secondery.title }}
+            </p>
+            <p class="subtitle__text"> {{ secondery.short_description }}</p>
+          </div>
+          <div class="button__download">
+            <a href="{% url 'detailview' 'post' secondery.pk %}" class="button__download__text">
+              <img src="{% static 'img/icon__doc.png' %}" class="icon__doc" alt="">
+              Подробнее</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+      {% else %}
+
+      <div class="col-xs-12  col-md-6 col-lg-6 col-xl-3">
+        <div class="block__agreements ">
+          <div class="date">
+            <p class="date__number__two text-left">
+              10 Июля 2018 </p>
+            <p class="naks__news__tag__two text-right">
+              Новости НАКС</p>
+          </div>
+          <div class="block__agreements__text">
+            <p class="agreements__header__text">
+              Соглашение о сотрудничестве между Советом по профессиональным квалификациям в области сварки
+            </p>
+            <p class="subtitle__text">
+              10 июля 2018 года подписано соглашение о сотрудничестве между Советом по профессиональным
+              квалификациям
+            </p>
+          </div>
+          <div class="button__download">
+            <a href="" class="button__download__text" download="">
+              <img src="{% static 'img/icon__doc.png' %}" class="icon__doc" alt="">
+              Соглашение</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-xl-3 col-md-6 col-lg-6">
+        <div class="block__agreements animated ">
+          <div class="date">
+            <p class="date__number__two text-left">
+              10 Июля 2018 </p>
+            <p class="naks__news__tag__two text-right">
+              Новости НАКС</p>
+          </div>
+          <div class="block__agreements__text">
+            <p class="agreements__header__text">
+              Соглашение о сотрудничестве между Советом по профессиональным квалификациям в области сварки
+            </p>
+            <p class="subtitle__text">
+              10 июля 2018 года подписано соглашение о сотрудничестве между Советом по профессиональным
+              квалификациям
+            </p>
+          </div>
+          <div class="button__download">
+            <a href="" class="button__download__text" download="">
+              <img src="{% static 'img/icon__doc.png' %}" class="icon__doc" alt="">
+              Соглашение</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-xl-3 col-md-6 col-lg-6">
+        <div class="block__agreements">
+          <div class="date">
+            <p class="date__number__two text-left">
+              10 Июля 2018 </p>
+            <p class="naks__news__tag__two text-right">
+              Новости НАКС</p>
+          </div>
+          <div class="block__agreements__text">
+            <p class="agreements__header__text">
+              Соглашение о сотрудничестве между Советом по профессиональным квалификациям в области сварки
+            </p>
+            <p class="subtitle__text">
+              10 июля 2018 года подписано соглашение о сотрудничестве между Советом по профессиональным
+              квалификациям
+            </p>
+          </div>
+          <div class="button__download">
+            <a href="" class="button__download__text" download="">
+              <img src="{% static 'img/icon__doc.png' %}" class="icon__doc" alt="">
+              Соглашение</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-xl-3 col-md-6 col-lg-6">
+        <div class="block__agreements">
+          <div class="date">
+            <p class="date__number__two text-left">
+              10 Июля 2018 </p>
+            <p class="naks__news__tag__two text-right">
+              Новости НАКС</p>
+          </div>
+          <div class="block__agreements__text">
+       /bewe     <p class="agreements__header__text">
+              Соглашение о сотрудничестве между Советом по профессиональным квалификациям в области сварки
+            </p>
+            <p class="subtitle__text">
+              10 июля 2018 года подписано соглашение о сотрудничестве между Советом по профессиональным
+              квалификациям
+            </p>
+          </div>
+          <div class="button__download">
+            <a href="" class="button__download__text" download="">
+              <img src="{% static 'img/icon__doc.png' %}" class="icon__doc" alt="">
+              Соглашение</a>
+          </div>
+        </div>
+      </div>
+{% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- end news block -->
+
+<!-- Articles -->
+<div class="articles__block">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p class="articles__header__content">Статьи
+        </p>
+      </div>
+    </div>
+    <div class="row">
+
+      {% if articles %}
+      {% for article in articles %}
+      <div class="col-xs-12  col-md-6 col-lg-12 col-xl-4">
+        <div class="articles__box ">
+          <p class="date__articles text-right"> {{ article.published_date }}</p>
+          <p class="articles__text">
+            {{ article.title }}
+          </p>
+
+          <p class="articles__text__small">
+            {{ article.shord_description }}
+          </p>
+          <div class="button__read text-right">
+            <a href="{% url 'detailview' 'article' article.pk %}" class="read__text__button">
+              Читать <img src="{% static 'img/arrow__next-02.png' %}" class="arrow__next__two" alt="">
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="col-xs-12  col-md-6 col-lg-12 col-xl-4">
+        <div class="articles__box ">
+          <p class="date__articles text-right">
+            10 Июля, 2018
+          </p>
+          <p class="articles__text">
+            Технология <br> Орбитальной сварки
+          </p>
+
+          <p class="articles__text__small">
+            В соответствии с требованиями действующей нормативной документации в газовой сфере...
+          </p>
+          <div class="button__read text-right">
+            <a href="osobennosti-nerezrushaushego-controlya.html#osobennosti__controlya" class="read__text__button">
+              Читать <img src="{% static 'img/arrow__next-02.png' %}" class="arrow__next__two" alt="">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-xl-4 col-md-6 col-lg-12">
+        <div class="articles__box">
+          <p class="date__articles text-right">
+            10 Июля, 2018
+          </p>
+          <p class="articles__text">
+            Особенности <br> неразрушающего контроля
+          </p>
+
+          <p class="articles__text__small">
+            В соответствии с требованиями действующей нормативной документации в газовой сфере...
+          </p>
+          <div class="button__read text-right">
+            <a href="osobennosti-nerezrushaushego-controlya.html#osobennosti__controlya" class="read__text__button">
+              Читать <img src="{% static 'img/arrow__next-02.png ' %}" class="arrow__next__two" alt="">
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-xl-4 col-md-12 col-lg-12">
+        <div class="articles__box">
+          <p class="date__articles text-right">
+            10 Июля, 2018
+          </p>
+          <p class="articles__text">
+            Особенности <br> неразрушающего контроля
+          </p>
+
+          <p class="articles__text__small">
+            В соответствии с требованиями действующей нормативной документации в газовой сфере...
+          </p>
+          <div class="button__read text-right">
+            <a href="osobennosti-nerezrushaushego-controlya.html#osobennosti__controlya" class="read__text__button">
+              Читать <img src="{% static 'img/arrow__next-02.png ' %}" class="arrow__next__two" alt="">
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {% endif %}
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</div>
+<!-- end articles block -->
