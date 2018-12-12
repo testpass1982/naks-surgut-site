@@ -1,0 +1,109 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+{% comment %} documens block {% endcomment %}
+<div class="doc__box" id="doc-box">
+    <div class="container">
+      <button class="button__back__to__main">
+        <a href="{% url 'main' %}" class="button__back__to__main__text text-align-center">
+          <img src="{% static '/img/arrow__next-01.png' %}" class="arrow__back__one" alt=""> На главную
+        </a>
+      </button>
+
+
+      <div class="row">
+        <div class="col-xl-4">
+          <p class="header__document" id="rukovodyawie__doc">
+            Документы
+          </p>
+        </div>
+      </div>
+
+      <div class="form__search__block">
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="form__search__document">
+              <form class="search-docs border-top border-bottom py-4 py-sm-5 mb-4">
+                <div class="form-row mb-4">
+                  <div class="col-sm-6 col-xl-4 mb-4 mb-sm-0">
+                    <label for="search__name__text">Поиск по названию</label>
+                    <input type="text" class="form__control__doc" id="">
+                  </div>
+                  <div class="col-sm-6 col-xl-4">
+                    <label for="type__of__document">Вид документа</label>
+                    <select id="type__of__document" class="drop__down__form">
+                      <option selected>Руководящие документы</option>
+                      <option>Нормативные документы</option>
+                      <option>Соглашения</option>
+                    </select>
+                  </div>
+                </div>
+                <button type="submit" class="button__search__document" onclick="return false" id="header__doc">
+                  Найти
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-8" id="selected">
+          <p class="name__selected__document">
+            Руководящие документы
+          </p>
+        </div>
+      </div>
+
+
+
+    {% for document in accreditation_list %}
+      <div class="background__for__document">
+        <div class="row">
+          <div class="col-xl-1 col-sm-2 col-md-2 align-self-center">
+            <img src="{% static '/img/icon_pdf.png' %}" class="doc__icon" alt="Иконка .pdf">
+          </div>
+          <div class="col-sm-8 align-self-center">
+            <p class="document__name__text">
+              {{ document.title }}
+            </p>
+          </div>
+          <div class="col-sm-12 col-md-12 col-xl-3">
+            <div class="buttons__documents text-right" >
+              <a href="{{ document.document.url }}"  id="link-modal-{{ document.pk }}" class="button__download__document" download="">Скачать</a>
+              <button id="to-modal-{{ document.pk }}" class="button__viev__document" data-toggle="modal" data-target="#document_preview_modal" >Просмотреть</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% include 'mainapp/includes/document-preview-modal.html' %}
+      {% endfor %}
+
+      <div class="row">
+        <div class="col-sm-8" id="selected">
+          <p class="name__selected__document">
+            Нормативные документы
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8" id="selected">
+          <p class="name__selected__document">
+          Соглашения</p>
+        </div>
+      </div>
+
+      <button class="button__back__to__main">
+        <a href="{% url 'main' %}" class="button__back__to__main__text text-align-center">
+          <img src="{% static '/img/arrow__next-01.png' %}" class="arrow__back__one" alt=""> На главную
+        </a>
+      </button>
+    </div>
+
+  </div>
+  
+{% endblock  %}

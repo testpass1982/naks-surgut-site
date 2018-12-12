@@ -1728,6 +1728,8 @@ border: 1px red solid;
 }
 
 .button__viev__document {
+  display: block;
+  width: 100%;
   border: 1px solid #5ba4dd;
   padding: 10px 15px;
   border-radius: 3px;

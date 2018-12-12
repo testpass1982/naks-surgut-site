@@ -234,16 +234,22 @@ def messages(request):
     }
     return render(request, 'mainapp/messages.html', context)
 
+
 def documents(request):
     """view for documents page"""
 
-    doctypes = ['Аккредитация САСв', 'Допуск ЦОК', 'Оценочное средство']
+    # doctypes = ['Аккредитация САСв', 'Допуск ЦОК', 'Оценочное средство']
 
-    tags = Tag.objects.all().filter(name__in=doctypes)
+    # tags = Tag.objects.all().filter(name__in=doctypes)
 
-    accreditation_list = Document.objects.filter(tags__in=Tag.objects.filter(name='Аккредитация САСв'))
-    cok_accreditation_list = Document.objects.filter(tags__in=Tag.objects.filter(name='Допуск ЦОК'))
-    os_doc_list = Document.objects.filter(tags__in=Tag.objects.filter(name='Оценочное средство'))
+    accreditation_list = Document.objects.filter(
+        tags__in=Tag.objects.filter(name='Аккредитация САСв'))
+    cok_accreditation_list = Document.objects.filter(
+        tags__in=Tag.objects.filter(name='Допуск ЦОК'))
+    os_doc_list = Document.objects.filter(
+        tags__in=Tag.objects.filter(name='Оценочное средство'))
+    norm_doc_list = Document.objects.filter(
+        tags__in=Tag.objects.filter(name='Нормативный документ'))
     print(accreditation_list)
     print(cok_accreditation_list)
     print(os_doc_list)
@@ -252,12 +258,15 @@ def documents(request):
         'title': 'Документы',
         'accreditation_list': accreditation_list,
         'cok_accreditation_list': cok_accreditation_list,
-        'os_doc_list': os_doc_list
+        'os_doc_list': os_doc_list,
+        'norm_doc_list': norm_doc_list
     }
     return render(request, 'mainapp/documents.html', content)
 
+
 def services(request):
     return render(request, 'mainapp/services.html')
+
 
 def about(request):
     """this is docstring"""
@@ -266,6 +275,7 @@ def about(request):
         'pages': pages
     }
     return render(request, 'mainapp/about.html', content)
+
 
 def staff(request):
     """this is docstring"""

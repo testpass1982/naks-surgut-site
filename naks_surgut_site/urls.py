@@ -31,8 +31,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('messages/', mainapp.messages, name='messages'),
     # path('validate_form/', mainapp.validate_form,
-        #  name='validate_form'), # use for ajax form validation
-    # path('documents/', mainapp.documents, name="documents"),
+    #  name='validate_form'), # use for ajax form validation
+    path('documents/', mainapp.documents, name="documents"),
     path('services/', mainapp.services, name="services"),
     path('about/', mainapp.about, name="about"),
     # path('staff', mainapp.staff, name='staff')

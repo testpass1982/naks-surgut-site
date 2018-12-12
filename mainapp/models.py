@@ -10,6 +10,8 @@ from django.urls import reverse
 # from django_resized import ResizedImageField
 
 # Create your models here.
+
+
 class Tag(models.Model):
 
     name = models.CharField(max_length=64)
@@ -198,6 +200,7 @@ class Message(models.Model):
         # if status_code in STATUS_LIST:
         self.status = status_code
 
+
 class Contact(models.Model):
     title = models.CharField(u'Название контакта', max_length=64, blank=False)
     description = models.CharField(u'Описание', max_length=200, blank=False)
@@ -209,10 +212,11 @@ class Contact(models.Model):
     class Meta:
         verbose_name = "Контакт"
         verbose_name_plural = "Контакты"
-    
+
     def __str__(self):
         return self.title
-    
+
+
 class Staff(models.Model):
     photo = models.ImageField(u'Фотография', blank=True)
     name = models.CharField(u'ФИО', max_length=120, blank=False)
@@ -223,9 +227,10 @@ class Staff(models.Model):
     class Meta:
         verbose_name = "Сотрудник"
         verbose_name_plural = "Сотрудники"
-    
+
     def __str__(self):
         return '{} - {}'.format(self.name, self.job)
+
 
 class Registry(models.Model):
     """this is the class to load external registry records"""
