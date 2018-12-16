@@ -551,6 +551,12 @@ border: 1px red solid;
   margin-bottom: 65px;
 }
 
+.side__related__tag {
+  padding: 10px;
+  font-size: 14px;
+  color: white;
+}
+
 .text__to__news {
   font-size: 20px;
   font-weight: 550;

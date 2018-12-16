@@ -115,32 +115,48 @@
 
 
           <div class="line__text__news"></div>
+          <h3>
+            Другие новости:
+          </h3>
           
+        {% if side_related_posts %}
+        {% for obj in side_related_posts %}
 
-          <a href="news.html#news__box">
+          
+          <a href="{% url 'detailview' 'post' obj.post.pk %}#news__box">
             <div class="block__news__one">
-              <div class="block__img__news">
+              <div class="block__img__news" style="background: url({{ obj.picture.image.url }}) no-repeat; background-size: cover;">
                 <div class="block__news__box">
-                  <div class="date">
-                    <p class="date__number text-right">
-                      10 Июля<br> 2018 </p>
+        
+                  <div class="container">
+
+
+                    <div class="side__related__tag">{{ obj.post.created_date }}          
+                    {% for tag in obj.post.tags.all %}
+                    <i class="fa fa-hashtag"></i>{{ tag.name }}&nbsp;
+                    {% endfor %}
+                    </div>    
                   </div>
-                  <p class="naks__news__tag text-right">Новости НАКС</p>
+                  
                   <div class="die__for__text">
                     <p class="text__to__news">
-                      Соглашение о сотрудничестве между СРО НП "НАКС" и CNPC INTERNATIONAL WELDING TRAINING CENTER
+                      {{ obj.post.title }}
                     </p>
                   </div>
                 </div>
               </div>
             </div>
           </a>
+        
+        {% endfor %}
+
+        {% endif %}
          
 
           
 
-          <a href="all-news.html" class="all__news">
-              Все новости <img src="img/arrow__next-01.png" alt="">
+          <a href="{% url 'news' %}" class="all__news">
+              Все новости <img src="{% static 'img/arrow__next-01.png' %}" alt="">
             </a>          
         </div>
         
@@ -149,8 +165,8 @@
      
 
       <button class="button__back__to__main">
-        <a href="index.html" class="button__back__to__main__text text-align-center">
-          <img src="/img/arrow__next-01.png" class="arrow__back__one" alt=""> На главную
+        <a href="{% url 'main' %}" class="button__back__to__main__text text-align-center">
+          <img src="{% static '/img/arrow__next-01.png' %}" class="arrow__back__one" alt=""> На главную
         </a>
       </button>
 

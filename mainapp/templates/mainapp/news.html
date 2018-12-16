@@ -6,7 +6,50 @@
     <h2>Все новости</h2>
   </div>
 
-  <nav aria-label="page navigation example">
+
+  <div class="row">
+    <div class="col-xs-12 col-lg-8">
+
+      <nav aria-label="page navigation example">
+        <ul class="pagination ml-3">
+          <li class="page-item"><a class="page-link" href="#">Первая</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Последняя</a></li>
+        </ul>
+      </nav>
+
+    {% if news %}
+
+     {% for obj in news %}
+     <div class="container-fluid">
+        <a href="news.html#news__box">
+          <div class="block__news__one">
+            <div class="block__img__news" style="background: url({{ obj.picture.image.url }}) no-repeat; background-size: cover;">
+              <div class="block__news__box">
+                <div class="container d-flex flex-row justify-content-start">
+                  <div class="date">
+                    <p class="date__number text-right">{{obj.post.published_date}}</p>
+                  </div>
+                  <p class="naks__news__tag text-right">{% for tag in obj.post.tags.all %}
+                  <i class="fa fa-hashtag"></i>{{tag.name}}
+                  {% endfor %}
+                  </p>
+                  <div class="die__for__text">
+                    <p class="text__to__news">
+                      {{ obj.post.title }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+     {% endfor %}
+
+       <nav aria-label="page navigation example">
     <ul class="pagination ml-3">
       <li class="page-item"><a class="page-link" href="#">Первая</a></li>
       <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -15,10 +58,12 @@
       <li class="page-item"><a class="page-link" href="#">Последняя</a></li>
     </ul>
   </nav>
-
-  <div class="row">
-    <div class="col-8">
-      <div class="container-fluid">
+    </div> 
+      
+      
+    {% else %}
+      
+    <div class="container-fluid">
         <a href="news.html#news__box">
           <div class="block__news__one">
             <div class="block__img__news">
@@ -38,69 +83,9 @@
           </div>
         </a>
       </div>
-      <div class="container-fluid">
-        <a href="news.html#news__box">
-          <div class="block__news__one">
-            <div class="block__img__news">
-              <div class="block__news__box">
-                <div class="date">
-                  <p class="date__number text-right">
-                    10 июля<br> 2018 </p>
-                </div>
-                <p class="naks__news__tag text-right">новости накс</p>
-                <div class="die__for__text">
-                  <p class="text__to__news">
-                    соглашение о сотрудничестве между сро нп "накс" и cnpc international welding training center
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="container-fluid">
-        <a href="news.html#news__box">
-          <div class="block__news__one">
-            <div class="block__img__news">
-              <div class="block__news__box">
-                <div class="date">
-                  <p class="date__number text-right">
-                    10 июля<br> 2018 </p>
-                </div>
-                <p class="naks__news__tag text-right">новости накс</p>
-                <div class="die__for__text">
-                  <p class="text__to__news">
-                    соглашение о сотрудничестве между сро нп "накс" и cnpc international welding training center
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="container-fluid">
-        <a href="news.html#news__box">
-          <div class="block__news__one">
-            <div class="block__img__news">
-              <div class="block__news__box">
-                <div class="date">
-                  <p class="date__number text-right">
-                    10 июля<br> 2018 </p>
-                </div>
-                <p class="naks__news__tag text-right">новости накс</p>
-                <div class="die__for__text">
-                  <p class="text__to__news">
-                    соглашение о сотрудничестве между сро нп "накс" и cnpc international welding training center
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-
-    <div class="col-4">
+ 
+    {% endif %}
+    <div class="col-xs-12 col-lg-4">
       <div class="container-fluid">
       <h3>Возможно, это вас заинтересует</h3>
         <div class="block__agreements">
@@ -154,16 +139,7 @@
     </div>
   </div>
 
-  <nav aria-label="page navigation example">
-    <ul class="pagination ml-3">
-      <li class="page-item"><a class="page-link" href="#">Первая</a></li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Последняя</a></li>
-    </ul>
-  </nav>
-</div>
+
 
 {% endblock %}
 <!-- news block -->

@@ -94,6 +94,7 @@ def news(request):
         'bottom_related': articles
     }
 
+
     return render(request, 'mainapp/news.html', content)
 
 
@@ -117,13 +118,18 @@ def details(request, pk=None, content=None):
     if content == 'post':
         attached_images = PostPhoto.objects.filter(post__pk=pk)
         attached_documents = Document.objects.filter(post__pk=pk)
+        side_related = Post.objects.all().exclude(id=pk).order_by('-created_date')[:2]
+        side_related_posts = [dict({'post': post, 'picture': PostPhoto.objects.filter(
+        post__pk=post.pk).first()}) for post in side_related]
         post_content = {
             'post': obj,
             'images': attached_images,
             'documents': attached_documents,
+            'side_related_posts': side_related_posts,
             'bottom_related': Article.objects.all().order_by(
                 '-created_date')[:3]
         }
+        print('SIDE_RELATED', post_content['side_related_posts'])
     if content == 'article':
         tags_pk_list = [tag.pk for tag in obj.tags.all()]
         related_articles = Article.objects.filter(

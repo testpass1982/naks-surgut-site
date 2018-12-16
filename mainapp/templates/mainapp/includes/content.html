@@ -188,13 +188,13 @@
             <div class="block__img__news" style="background: url({{ picture.image.url }}) no-repeat;
                                                        background-size: cover;">
               <div class="block__news__box">
-                <div class="d-flex flex-row justify-content-between">
+                <div class="d-flex flex-row justify-content-start">
                   <div class="date w-30">
                     <p class="date__number text-right">
                       {{ post.published_date|date:"d-m-Y" }}</p>
                   </div>
                   {% for tag in post.tags.all %}
-                  <p class="naks__news__tag flex-fill">{{ tag.name }}</p>
+                  <p class="naks__news__tag"><i class="fa fa-hashtag"></i>{{ tag.name }}</p>
                   {% endfor %}
                 </div>
                 <div class="die__for__text">
