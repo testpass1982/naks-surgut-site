@@ -541,7 +541,6 @@ border: 1px red solid;
   font-size: 14px;
   font-weight: 550;
   padding: 35px;
-  position: absolute;
   color: #ffff;
 }
 
@@ -565,8 +564,14 @@ border: 1px red solid;
 }
 
 .die__for__text {
+  position: absolute;
+  top: 40%;
+  bottom: 0;
+  left: 0;
+  right: 0;
   background-color: rgba(45, 69, 125, 0.8);
   width: 80%;
+  height: 33%;
   padding: 35px;
 }
 
@@ -596,6 +601,7 @@ border: 1px red solid;
 }
 
 .block__news__box {
+  position: relative;
   background-color: rgba(104, 104, 104, 0.4);
   border-radius: 3px;
   width: 100%;
@@ -1519,11 +1525,10 @@ border: 1px red solid;
 }
 
 .social__seti {
+  flex-basis: 33%;
   border: 1px solid #e8e8e8;
   border-radius: 3px;
   padding: 10px;
-  width: 68%;
-  float: right;
 }
 
 @media screen and (max-width: 320px) {
@@ -1535,15 +1540,16 @@ border: 1px red solid;
 
 .email {
   border: 1px solid #e8e8e8;
+  text-align: center;
   border-radius: 3px;
   padding: 10px;
+  width: 50px;
 }
 
 @media screen and (max-width: 320px) {
   .email {
     display: none;
-    width: 100%;
-  }
+};
 }
 
 .email:hover {
@@ -1554,6 +1560,8 @@ border: 1px red solid;
   border: 1px solid #e8e8e8;
   border-radius: 3px;
   padding: 8px;
+  width: 50px;
+  text-align: center;
 }
 
 @media screen and (max-width: 320px) {

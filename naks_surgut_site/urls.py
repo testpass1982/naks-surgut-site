@@ -23,7 +23,7 @@ urlpatterns = [
     path('', mainapp.main, name='main'),
     path('news/', mainapp.news, name='news'),
     path('contact/', mainapp.contact, name='contact'),
-    # re_path(r'details/$', mainapp.details, name='post_details'),
+    re_path(r'details/$', mainapp.details, name='post_details'),
     path('detailview/<slug:content>/<slug:pk>',
          mainapp.details, name='detailview'),
     # path('create/<slug:content_type>', mainapp.create_factory, name='create'),

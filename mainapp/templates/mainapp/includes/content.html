@@ -183,18 +183,20 @@
       {% for post, picture in posts.items %}
       <div class="col-xs-12 col-xl-6 col-md-6">
 
-        <a href="{% url 'news' %}">
+        <a href="{% url 'detailview' 'post' post.pk %}">
           <div class="block__news__one">
             <div class="block__img__news" style="background: url({{ picture.image.url }}) no-repeat;
                                                        background-size: cover;">
               <div class="block__news__box">
-                <div class="date">
-                  <p class="date__number text-right">
-                    {{ post.published_date }}</p>
+                <div class="d-flex flex-row justify-content-between">
+                  <div class="date w-30">
+                    <p class="date__number text-right">
+                      {{ post.published_date|date:"d-m-Y" }}</p>
+                  </div>
+                  {% for tag in post.tags.all %}
+                  <p class="naks__news__tag flex-fill">{{ tag.name }}</p>
+                  {% endfor %}
                 </div>
-                {% for tag in post.tags.all %}
-                <p class="naks__news__tag text-right">{{ tag.name }}</p>
-                {% endfor %}
                 <div class="die__for__text">
                   <p class="text__to__news">
                     {{ post.title }}
