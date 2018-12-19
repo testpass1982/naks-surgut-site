@@ -168,7 +168,7 @@
     <div class="row">
       <div class="col">
         <p class="news__header__content">Новости
-          <a href="{% url 'news' %}" class="all__news float-right">
+          <a href="{% url 'news' %}#news__list__box" class="all__news float-right">
             Все новости <img src="{% static 'img/arrow__next-01.png' %}" alt="">
           </a>
         </p>
@@ -183,7 +183,7 @@
       {% for post, picture in posts.items %}
       <div class="col-xs-12 col-xl-6 col-md-6">
 
-        <a href="{% url 'detailview' 'post' post.pk %}">
+        <a href="{% url 'detailview' 'post' post.pk %}#news__box">
           <div class="block__news__one">
             <div class="block__img__news" style="background: url({{ picture.image.url }}) no-repeat;
                                                        background-size: cover;">
@@ -284,10 +284,11 @@
             </p>
             <p class="subtitle__text"> {{ secondery.short_description }}</p>
           </div>
-          <div class="button__download">
-            <a href="{% url 'detailview' 'post' secondery.pk %}" class="button__download__text">
-              <img src="{% static 'img/icon__doc.png' %}" class="icon__doc" alt="">
-              Подробнее</a>
+          <div class="button__download d-flex flex-row align-items-center">
+            <i class="fa fa-file"></i><a href="{% url 'detailview' 'post' secondery.pk %}#news__box" class="button__download__text">
+              
+                Подробнее
+            </a>
           </div>
         </div>
       </div>
@@ -425,7 +426,7 @@
             {{ article.shord_description }}
           </p>
           <div class="button__read text-right">
-            <a href="{% url 'detailview' 'article' article.pk %}" class="read__text__button">
+            <a href="{% url 'detailview' 'article' article.pk %}#news__box" class="read__text__button">
               Читать <img src="{% static 'img/arrow__next-02.png' %}" class="arrow__next__two" alt="">
             </a>
           </div>

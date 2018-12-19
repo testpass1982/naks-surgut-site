@@ -33,7 +33,8 @@ border: 1px red solid;
   padding: 15px;
 }
 
-.head__text__adres {
+.head__text__adres,
+.head__text__adres:hover {
   color: #89929d;
   font-weight: 550;
 }
@@ -736,6 +737,7 @@ border: 1px red solid;
 }
 
 .button__download__text {
+  padding-left: 5px;
   color: #4d4d4d;
   display: block;
   font-size: 12px;
@@ -1555,7 +1557,9 @@ border: 1px red solid;
 @media screen and (max-width: 320px) {
   .email {
     display: none;
-};
+  }
+
+  ;
 }
 
 .email:hover {

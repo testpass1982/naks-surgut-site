@@ -1,0 +1,88 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <!-- document block -->
+  <div class="contact__block" id="contact__block">
+    <div class="container">
+      <button class="button__back__to__main">
+        <a href="{% url 'main' %}" class="button__back__to__main__text text-align-center">
+          <img src="{% static '/img/arrow__next-01.png' %}" class="arrow__back__one" alt=""> На главную
+        </a>
+      </button>
+
+
+      <div class="row">
+        <div class="col-xl-8">
+          <div class="contact__white__box">
+            <p class="header__contact" id="">
+              Контакты
+            </p>
+            <div class="row d-line-block">
+              <div class="col-xl-6">
+                <p class="text__adress">
+                  Адрес
+                </p>
+                <div class="line__for__text"></div>
+                <a href="https://yandex.ru/maps/-/CBFteTC9dA" target="_blank" class="text__adress__contact">
+                  628406, Ханты-Мансийский автономный округ-Югра, г. Сургут, шоссе Нефтеюганское, дом 62/2, сооружение
+                  1
+                </a>
+              </div>
+              <div class="col-xl-5">
+                <p class="text__adress">
+                  Телефон
+                </p>
+                <div class="line__for__text"></div>
+                <p class="text__adress__number">
+                  8 (3462) 21-53-42 <br> 8 (3462) 21-53-41
+                </p>
+              </div>
+              <div class="line__contact__after__text"></div>
+              {% for contact in contacts %}
+              
+              <div class="col-xl-6">
+                <p class="text__adress">
+                  {{ contact.description }}
+                </p>
+                <p class="name__face__contact">
+                  {{ contact.title }}
+                </p>                
+              </div>
+              <div class="col-xl-5">
+                <p class="text__adress">
+                  Телефон / Почта
+                </p>
+                <p class="contact__face">
+                  {{ contact.phone }} <br>
+                  {{ contact.email}}
+                </p>               
+              </div>
+              <div class="line__contact__after__text"></div>
+              {% endfor %}
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+      <button class="button__back__to__main">
+        <a href="{% url 'main' %}" class="button__back__to__main__text text-align-center">
+          <img src="{% static '/img/arrow__next-01.png' %}" class="arrow__back__one" alt=""> На главную
+        </a>
+      </button>
+      <!-- info block -->
+    </div>
+  </div>
+  <div class="otsput"></div>
+
+{% endblock  %}

@@ -1,8 +1,10 @@
 {% extends 'mainapp/base.html' %}
+{% load static %}
 {% block content %}
+
 <div class="container">
   <!-- NEWS BLOCK -->
-  <div class="container-fluid mt-5">
+  <div class="container-fluid mt-5" id="news__list__box">
     <h2>Все новости</h2>
   </div>
 
@@ -12,11 +14,15 @@
 
       <nav aria-label="page navigation example">
         <ul class="pagination ml-3">
-          <li class="page-item"><a class="page-link" href="#">Первая</a></li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">Последняя</a></li>
+          {% if news.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page=1#news__list__box">В начало</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ news.previous_page_number }}#news__list__box">&lt;&lt;Предыдущая</a></li>
+          {% endif %}
+          <li class="page-item"><a class="page-link">Страница {{ news.number }} из {{ news.paginator.num_pages }}</a></li>
+          {% if news.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ news.next_page_number }}#news__list__box">Следующая &gt;&gt;</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ news.paginator.num_pages }}#news__list__box">В конец</a></li>
+          {% endif %}
         </ul>
       </nav>
 
@@ -50,19 +56,20 @@
      {% endfor %}
 
        <nav aria-label="page navigation example">
-    <ul class="pagination ml-3">
-      <li class="page-item"><a class="page-link" href="#">Первая</a></li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item"><a class="page-link" href="#">Последняя</a></li>
-    </ul>
-  </nav>
+        <ul class="pagination ml-3">
+          {% if news.has_previous %}
+          <li class="page-item"><a class="page-link" href="?page=1#news__list__box">В начало</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ news.previous_page_number }}#news__list__box">&lt;&lt;Предыдущая</a></li>
+          {% endif %}
+          <li class="page-item"><a class="page-link">Страница {{ news.number }} из {{ news.paginator.num_pages }}</a></li>
+          {% if news.has_next %}
+          <li class="page-item"><a class="page-link" href="?page={{ news.next_page_number }}#news__list__box">Следующая &gt;&gt;</a></li>
+          <li class="page-item"><a class="page-link" href="?page={{ news.paginator.num_pages }}#news__list__box">В конец</a></li>
+          {% endif %}
+        </ul>
+      </nav>
     </div> 
-      
-      
     {% else %}
-      
     <div class="container-fluid">
         <a href="news.html#news__box">
           <div class="block__news__one">
@@ -85,10 +92,43 @@
       </div>
  
     {% endif %}
+
     <div class="col-xs-12 col-lg-4">
       <div class="container-fluid">
       <h3>Возможно, это вас заинтересует</h3>
+        {% if side_related %}
+
+        {% for element in side_related %}
+        
+        <div class="container-fluid">
         <div class="block__agreements">
+          <div class="date">
+            <p class="date__number__two text-left">
+              {{ element.published_date }} </p>
+            <p class="naks__news__tag__two text-right">
+             {% for tag in element.tags.all %}
+             <i class="fa fa-hashtag"></i>{{ tag.name }}
+             {% endfor %}</p>
+          </div>
+          <div class="block__agreements__text">
+            <p class="agreements__header__text">
+              {{  element.title }}
+            </p>
+            <p class="subtitle__text">
+              {{ element.short_description }}
+            </p>
+          </div>
+          <div class="button__download">
+            <a href="{% url 'detailview' 'article' element.pk %}#news__box" class="button__download__text">
+              <img src="{% static 'img/icon__doc.png' %}" class="icon__doc" alt="">
+              Открыть</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+        
+      {% else %}
+      <div class="block__agreements">
           <div class="date">
             <p class="date__number__two text-left">
               10 июля 2018 </p>
@@ -110,31 +150,11 @@
               соглашение</a>
           </div>
         </div>
+
+        {% endif %}
+        
       </div>
-      <div class="container-fluid">
-        <div class="block__agreements">
-          <div class="date">
-            <p class="date__number__two text-left">
-              10 июля 2018 </p>
-            <p class="naks__news__tag__two text-right">
-              новости накс</p>
-          </div>
-          <div class="block__agreements__text">
-            <p class="agreements__header__text">
-              соглашение о сотрудничестве между советом по профессиональным квалификациям в области сварки
-            </p>
-            <p class="subtitle__text">
-              10 июля 2018 года подписано соглашение о сотрудничестве между советом по профессиональным
-              квалификациям
-            </p>
-          </div>
-          <div class="button__download">
-            <a href="" class="button__download__text" download="">
-              <img src="img/icon__doc.png" class="icon__doc" alt="">
-              соглашение</a>
-          </div>
-        </div>
-      </div>
+      
 
     </div>
   </div>

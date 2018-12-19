@@ -7,7 +7,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Post, PostPhoto, Tag, Category, Document, Article, Message, Contact
 from .models import Staff
 from .forms import PostForm, ArticleForm, DocumentForm
-from .forms import SendMessageForm, SubscribeForm, AskQuestionForm
+from .forms import SendMessageForm, SubscribeForm, AskQuestionForm, DocumentSearchForm
 from .adapters import MessageModelAdapter
 from .message_tracker import MessageTracker
 # Create your views here.
@@ -75,6 +75,7 @@ def news(request):
     all_news = Post.objects.all().filter(
         publish_on_news_page=True).order_by('-created_date')
     all_documents = Document.objects.all().order_by('-created_date')[:5]
+    side_articles = Article.objects.all().order_by('-created_date')[:3]
     post_list = [dict({'post': post, 'picture': PostPhoto.objects.filter(
         post__pk=post.pk).first()}) for post in all_news]
     # показываем несколько новостей на странице
@@ -91,9 +92,10 @@ def news(request):
         'title': title,
         'news': posts,
         'documents': all_documents,
+        'side_related': side_articles,
         'bottom_related': articles
-    }
 
+    }
 
     return render(request, 'mainapp/news.html', content)
 
@@ -118,9 +120,10 @@ def details(request, pk=None, content=None):
     if content == 'post':
         attached_images = PostPhoto.objects.filter(post__pk=pk)
         attached_documents = Document.objects.filter(post__pk=pk)
-        side_related = Post.objects.all().exclude(id=pk).order_by('-created_date')[:2]
+        side_related = Post.objects.all().exclude(
+            id=pk).order_by('-created_date')[:2]
         side_related_posts = [dict({'post': post, 'picture': PostPhoto.objects.filter(
-        post__pk=post.pk).first()}) for post in side_related]
+            post__pk=post.pk).first()}) for post in side_related]
         post_content = {
             'post': obj,
             'images': attached_images,
@@ -247,7 +250,17 @@ def documents(request):
     # doctypes = ['Аккредитация САСв', 'Допуск ЦОК', 'Оценочное средство']
 
     # tags = Tag.objects.all().filter(name__in=doctypes)
-
+    search_form = DocumentSearchForm()
+    if request.method == 'GET':
+        search_result_content = {}
+        if 'search_document' in request.GET:
+            print('REQUEST_GET', request.GET)
+            search_form = DocumentSearchForm(request.GET)
+            if search_form.is_valid():
+                search_result = Document.objects.filter(
+                    title__contains=request.GET.get('document_name')).order_by('-created_date')
+                print('SEARCH_RESULT', search_result)
+                search_result_content['search_result'] = search_result
     accreditation_list = Document.objects.filter(
         tags__in=Tag.objects.filter(name='Аккредитация САСв'))
     cok_accreditation_list = Document.objects.filter(
@@ -256,17 +269,24 @@ def documents(request):
         tags__in=Tag.objects.filter(name='Оценочное средство'))
     norm_doc_list = Document.objects.filter(
         tags__in=Tag.objects.filter(name='Нормативный документ'))
-    print(accreditation_list)
-    print(cok_accreditation_list)
-    print(os_doc_list)
+    sogl_doc_list = Document.objects.filter(
+        tags__in=Tag.objects.filter(name='Соглашение'))
+    # print(accreditation_list)
+    # print(cok_accreditation_list)
+    # print(os_doc_list)
 
     content = {
         'title': 'Документы',
         'accreditation_list': accreditation_list,
         'cok_accreditation_list': cok_accreditation_list,
         'os_doc_list': os_doc_list,
-        'norm_doc_list': norm_doc_list
+        'norm_doc_list': norm_doc_list,
+        'sogl_doc_list': sogl_doc_list,
+        'search_form': search_form
     }
+    if search_result_content:
+        content.update(search_result_content)
+        print('CONTENT WITH SEARCH', content)
     return render(request, 'mainapp/documents.html', content)
 
 
@@ -293,3 +313,55 @@ def staff(request):
     }
 
     return render(request, 'mainapp/staff.html', content)
+
+
+def reestrsp(request, param=None):
+    """registry view for imported database entries"""
+    search_form = SearchRegistryForm()
+    if 'search' in request.GET:
+        form = SearchRegistryForm(request.GET)
+        if form.is_valid:
+            print('valid')
+            search_form = form
+            records = Registry.objects.filter(
+                Q(title__contains=request.GET.get('fio')), Q(org__contains=request.GET.get('work_place')))
+    else:
+        records = Registry.objects.all().order_by('-created_date')
+
+    result_to_page = []
+    for result in records:
+        result_to_page.append(json.loads(result.params))
+
+    list_of_records = result_to_page
+
+    """import data from data-url using token"""
+    if request.GET.get('import'):
+        accept = request.GET.get('import')
+        if accept == 'Y':
+            imported = Importer(data_url)
+            for i in range(200):
+                imported.save_data_to_db(imported.data[i])
+                print('DONE IMPORT')
+
+    page = request.GET.get('page')
+    paginator = Paginator(list_of_records, 10)
+    paginated_records = paginator.get_page(page)
+    page_url = request.build_absolute_uri()
+
+    """making next and previous page urls"""
+    urlmaker = UrlMaker(page_url, paginated_records)
+    urlmaker.make_next_url()
+    urlmaker.make_prev_url()
+    print('CURRENT', urlmaker.current)
+
+    if len(paginated_records) != 0:
+        content = {
+            'records': paginated_records,
+            'search_form': search_form,
+            'urls': urlmaker.urls_dict,
+        }
+    else:
+        print('empty')
+        content = None
+
+    return render(request, 'mainapp/reestr.html', content)

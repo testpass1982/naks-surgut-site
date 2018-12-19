@@ -61,18 +61,16 @@
                   <a class="nav__link__two dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Документы</a>
                   <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="rukovodyawie-documenti.html#rukovodyawie__doc">Руководящие документы</a>
-                    <a class="dropdown-item" href="normativnie-documenti.html#normativnie__doc">Нормативные документы</a>
-                    <a class="dropdown-item" href="soglashenya.html#soglashenya__doc">Соглашения</a>
+                    <a class="dropdown-item" href="{% url 'documents'%}#rd_id">Руководящие документы</a>
+                    <a class="dropdown-item" href="{% url 'documents'%}#nd_id">Нормативные документы</a>
+                    <a class="dropdown-item" href="{% url 'documents'%}#sg_id">Соглашения</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav__link__two dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Выписка из реестра САСв</a>
                   <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="reestr-sasv.html#reestr__sasv">Выписка из реестра <br> САСв
-                      Ростехнадзора
-                      сварочных <br> технологий</a>
+                    <a class="dropdown-item" href="{% url 'reestr' 'personal' %}">Реестр аттестаций персонала сварочного производства </a>
                     <a class="dropdown-item" href="reestr-sasv-oborudovanie.html#reestr__sasv__oborudovanie">Выписка из
                       реестра <br> САСв Ростехнадзора
                       сварочного <br> оборудования</a>
@@ -82,13 +80,13 @@
                   </div>
                 </li>
                 <li class="nav-item active">
-                  <a class="nav-link" href="contact.html#contact__block">Контакты
+                  <a class="nav-link" href="{% url 'contact' %}">Контакты
                     <span class="sr-only">(current)</span>
                   </a>
                 </li>
               </ul>
             </div>
-            <form class="form-inline my-2 my-lg-0  d-lg-block" action="#result" method="get">
+            <form class="form-inline my-2 my-lg-0  d-lg-block">
               <div class="input-group">
                 <input type="text" class="form-control border" name="s" aria-describedby="basic-addon2">
                 <div class="input-group-append">

@@ -86,6 +86,13 @@ class AskQuestionForm(forms.Form):
         initial=True, required=True, widget=forms.CheckboxInput(
             attrs={'class': 'checkmark'}))
 
+
+class DocumentSearchForm(forms.Form):
+    document_name = forms.CharField(max_length=50, required=False, widget=forms.TextInput(
+        attrs={'class': 'form__control__doc',
+               'placeholder': 'Введите название документа'}
+    ))
+
     # def clean(self):
     #     document = self.cleaned_data.get('document', None)
     #     if not document:
