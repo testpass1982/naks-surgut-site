@@ -236,6 +236,7 @@ class Registry(models.Model):
     """this is the class to load external registry records"""
     STATUS_LIST = ((0, 'new'), (1, 'published'))
     title = models.CharField(u'Название', max_length=64, blank=True)
+    org = models.CharField(u'Организация', max_length=120, blank=True)
     typeof = models.CharField(u'Тип', max_length=64, blank=True)
     params = models.CharField(u'Параметры',
                               max_length=999, blank=True)

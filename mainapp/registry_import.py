@@ -8,7 +8,7 @@ from django.utils import timezone
 from django.shortcuts import get_object_or_404
 
 
-data_url = 'http://ac.naks.ru/curl/json.php?url=reestr_personal&token=DgSrtqysjGtwKdySTTo8SsDwqdsa=personal&popov=Y'
+data_url = 'http://ac.naks.ru/curl/json.php?url=reestr_personal&token=DgSrtqysjGtwKdySTTo8SsDwqdsa&type=personal&popov=Y&count=1000'
 
 
 def date_parse(string):
@@ -44,7 +44,7 @@ class RegistryRecordMapper:
             print('Found')
             return True
         except Exception as e:
-            print('Not found')
+            print('Duplicates not found')
             return False
 
     def find_by_id(self, record):
@@ -108,3 +108,8 @@ class Importer:
             """if not - insert with mapper method"""
             self.mapper.insert(record)
             print('SAVED NEW RECORD', record.title)
+
+
+# importer = Importer(data_url)
+# for i in range(0, 10):
+#     importer.save_data_to_db(importer.data[i])

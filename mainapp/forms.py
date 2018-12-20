@@ -93,6 +93,12 @@ class DocumentSearchForm(forms.Form):
                'placeholder': 'Введите название документа'}
     ))
 
+class SearchRegistryForm(forms.Form):
+    fio = forms.CharField(max_length=64, required=False, widget=forms.TextInput(
+        attrs={'class': 'form__subject__search'}))
+    work_place = forms.CharField(max_length=64, required=False, widget=forms.TextInput(
+        attrs={'class': 'form__subject__search'}))
+
     # def clean(self):
     #     document = self.cleaned_data.get('document', None)
     #     if not document:

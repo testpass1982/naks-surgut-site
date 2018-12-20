@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404, JsonResponse, HttpResponseRedirect
 from django.core.exceptions import ValidationError
@@ -5,11 +6,14 @@ from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Post, PostPhoto, Tag, Category, Document, Article, Message, Contact
+from .models import Registry
 from .models import Staff
 from .forms import PostForm, ArticleForm, DocumentForm
-from .forms import SendMessageForm, SubscribeForm, AskQuestionForm, DocumentSearchForm
+from .forms import SendMessageForm, SubscribeForm, AskQuestionForm, DocumentSearchForm, SearchRegistryForm
 from .adapters import MessageModelAdapter
 from .message_tracker import MessageTracker
+from .utilites import UrlMaker
+from .registry_import import Importer, data_url
 # Create your views here.
 
 
@@ -315,7 +319,7 @@ def staff(request):
     return render(request, 'mainapp/staff.html', content)
 
 
-def reestrsp(request, param=None):
+def reestrsp(request, type=None):
     """registry view for imported database entries"""
     search_form = SearchRegistryForm()
     if 'search' in request.GET:
