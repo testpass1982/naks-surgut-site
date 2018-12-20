@@ -2427,14 +2427,14 @@ label[for=type__of__viev] {
 }
 
 .header__subject__list {
-  padding: 25px 25px;
+  padding: 20px;
   background-color: #fff;
   border-radius: 3px;
   margin-bottom: 15px;
 }
 
 .name__list {
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   color: #000;
 }

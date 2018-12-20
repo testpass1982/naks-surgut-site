@@ -26,37 +26,26 @@
 
       <div class="line__text__one__reestr"></div>
       <div class="row">
-        <div class="col-xl-4" id="">
-          <p class="header__name__selected__reestr">
+        <div class="col-lg-3" id="">
+          <p class="header__name__selected__reestr" id="news__list__box">
            Выписка из реестра <br> аттестаций сварщиков
           </p>
         </div>
-        <div class="col-xl-3 d-inline-block align-self-center" id=""> 
-          <p class="number__list__found__subject">Найдено: 1-5 из 361</p> 
-        </div>
-        <div class="col-xl-5 d-inline-block align-self-center" id=""> 
+        <div class="offset-lg-3 col-lg-6 d-inline-block align-self-center" id=""> 
             <div class="number__list float-right">
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination">
-                      <li class="page-item">
-                        <a class="page-link" href="#" onclick="return false" aria-label="Previous">
-                          <span aria-hidden="true"><img src="/img/back__page.png" alt=""></span>
-                          <span class="sr-only">Previous</span>
-                        </a>
-                      </li>
-                      <li class="page-item"><a class="page-link" href="#" onclick="return false">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#" onclick="return false">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#" onclick="return false">3</a></li>
-                      <li class="page-item"><a class="page-link" href="#" onclick="return false">4</a></li>
-                      <li class="page-item"><a class="page-link" href="#" onclick="return false">5</a></li>
-                      <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next" onclick="return false">
-                          <span aria-hidden="true"><img src="/img/next__page.png" alt=""></span>
-                          <span class="sr-only">Next</span>
-                        </a>
-                      </li>
+                 <nav aria-label="page navigation example">
+                    <ul class="pagination ml-3">
+                      {% if records.has_previous %}
+                      <li class="page-item"><a class="page-link" href="?page=1#news__list__box">В начало</a></li>
+                      <li class="page-item"><a class="page-link" href="?page={{ records.previous_page_number }}#news__list__box">&lt;&lt;Предыдущая</a></li>
+                      {% endif %}
+                      <li class="page-item"><a class="page-link">Страница {{ records.number }} из {{ records.paginator.num_pages }}</a></li>
+                      {% if records.has_next %}
+                      <li class="page-item"><a class="page-link" href="?page={{ records.next_page_number }}#news__list__box">Следующая &gt;&gt;</a></li>
+                      <li class="page-item"><a class="page-link" href="?page={{ records.paginator.num_pages }}#news__list__box">В конец</a></li>
+                      {% endif %}
                     </ul>
-                  </nav>
+                </nav>
              </div>      
         </div>
       </div>
@@ -139,18 +128,20 @@
         </div>
         
         <div class="col-xl-8">
-          <div class="header__subject__list">
-            <div class="col-xl-2 d-inline-block">
-              <p class="name__list">Ф.И.О</p>
-            </div>
-            <div class="col-xl-3 d-inline-block">
-              <p class="name__list">Должность</p>
-            </div>
-            <div class="col-xl-4 d-inline-block">
-              <p class="name__list">Номер удостоверения</p>
-            </div>
-            <div class="col-xl-2 d-inline-block">
-              <p class="name__list">Срок действия</p>
+          <div class="header__subject__list text-center text-lg-left">
+            <div class="row">
+              <div class="col-md-3">
+                <p class="name__list">Ф.И.О</p>
+              </div>
+              <div class="col-md-3">
+                <p class="name__list">Должность</p>
+              </div>
+              <div class="col-md-3">
+                <p class="name__list">Номер удостоверения</p>
+              </div>
+              <div class="col-md-3">
+                <p class="name__list">Срок действия</p>
+              </div>
             </div>
           </div>
           <div class="row">
@@ -160,60 +151,67 @@
             
             {% for record in records %}
             
-            <div class="accordion" id="accordionExample">
+            <div class="accordion" id="accordion__{{ record.id }}">
                   <div class="card">
                     <div class="card-header" id="headingOne">
-                      <h5 class="mb-0">
-                        <div class="col-xl-2 d-inline-block align-middle">
-                          <button class="click__named__list" type="button" data-toggle="collapse" data-target="#collapse__{{record.id}}"
-                            aria-expanded="true" aria-controls="collapseTwo">
-                          {{ record.fio }}
-                          </button>
+                      
+                        <div class="row">
+                          <div class="col-lg-3 text-center text-lg-left">
+                            <button class="click__named__list" type="button" data-toggle="collapse" data-target="#collapse__{{record.id}}"
+                              aria-expanded="true" aria-controls="collapseTwo">
+                            {{ record.fio }}
+                            </button>
+                          </div>
+                          <div class="col-lg-3">
+                            <p class="additional__information text-center text-lg-left">{{ record.position }}</p>
+                          </div>
+                          <div class='col-lg-3'>
+                            <p class="additional__information text-center text-lg-left">{{ record.udost }}</p>
+                          </div>
+                          <div class="col-lg-3">
+                            <p class="additional__information text-center text-lg-left">от {{ record.date_create }} до {{ record.active_to }}{% if record.active_long %} <br>Продлено до: 
+                {{ record.active_long }}{% endif %}</p>
+                          </div>
                         </div>
-                        <div class="col-xl-3 d-inline-block">
-                          <p class="additional__information">Сварщик 4-го разряда</p>
-                        </div>
-                        <div class="col-xl-4 d-inline-block">
-                          <p class="additional__information">СУР-13АЦ-I-32072</p>
-                        </div>
-                        <div class="col-xl-2 d-inline-block">
-                          <p class="additional__information">13.07.2020</p>
-                        </div>
-                      </h5>
+                     
                     </div>
 
-                    <div id="collapse__{{record.id}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div id="collapse__{{record.id}}" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion__{{ record.id }}">
                       <div class="card-body">
-                          <div class="col-sm-2 d-inline-block align-middle">
-                              <p class="header__additional__information__list">Место работы</p>
-                            </div>
-                          <div class="col-sm-2 d-inline-block align-middle">
-                              <p class="header__additional__information__list">Вид аттестации</p>
-                            </div>
-                          <div class="col-sm-2 d-inline-block align-middle">
-                              <p class="header__additional__information__list">Вид деятельности</p>
-                            </div>
-                          <div class="col-sm-3 d-inline-block align-middle">
-                              <p class="header__additional__information__list">Область аттестации</p>
-                            </div>
-                          <div class="col-sm-2 d-inline-block align-middle">
-                              <p class="header__additional__information__list">Место аттестации</p>
-                            </div>
-                          <div class="col-sm-2 d-inline-block align-middle">
-                              <p class="subtitle__additional__information__list">ООО "Сибремстроймонтаж", г. Омск</p>
-                            </div>
-                          <div class="col-sm-2 d-inline-block align-middle">
-                              <p class="subtitle__additional__information__list">Первичная</p>
-                            </div>
-                          <div class="col-sm-2 d-inline-block align-middle">
-                              <p class="subtitle__additional__information__list">НИ</p>
-                            </div>
-                          <div class="col-sm-3 d-inline-block align-middle">
-                              <p class="subtitle__additional__information__list">СК(4) / М61</p>
-                            </div>
-                          <div class="col-sm-2 d-inline-block align-middle">
-                              <p class="subtitle__additional__information__list">СУР-13АЦ, 18АП</p>
-                            </div>
+                          <div class="row">
+                            <div class="col-sm-2 d-inline-block align-middle">
+                                <p class="header__additional__information__list text-center text-lg-left">Место работы</p>
+                            
+                                <p class="subtitle__additional__information__list text-center text-lg-left">{{ record.company }}</p>
+                              
+                              </div>
+                            <div class="col-sm-2 d-inline-block align-middle">
+                                <p class="header__additional__information__list text-center text-lg-left">Клеймо</p>
+                        
+                                <p class="subtitle__additional__information__list text-center text-lg-left">{{ record.stamp }}</p>
+                             
+                              </div>
+                            <div class="col-sm-2 d-inline-block align-middle">
+                                <p class="header__additional__information__list text-center text-lg-left">Вид деятельности</p>
+                           
+                                <p class="subtitle__additional__information__list text-center text-lg-left">{{ record.vid_d }}</p>
+                              
+                              </div>
+                            <div class="col-sm-3 d-inline-block align-middle">
+                                <p class="header__additional__information__list text-center text-lg-left">Область аттестации</p>
+                           
+                                <p class="subtitle__additional__information__list text-center text-lg-left">{{ record.obl_att }}</p>
+                            
+                              </div>
+                            <div class="col-sm-2 d-inline-block align-middle">
+                                <p class="header__additional__information__list text-center text-lg-left">Место аттестации</p>
+                            
+                                <p class="subtitle__additional__information__list text-center text-lg-left">{{ record.place }}</p>
+                              
+                              </div>
+                          
+                          
+                          </div>
 
                       </div>
                     </div>
