@@ -87,6 +87,7 @@ __pycache__/
 local_settings.py
 
 .env
+
 ### Database ###
 db.sqlite3
 *.jpg
@@ -97,3 +98,4 @@ db.sqlite3
 static/ckeditor/
 static/admin/
 *.sqlite3
+
