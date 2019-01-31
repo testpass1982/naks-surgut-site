@@ -86,3 +86,13 @@ __pycache__/
 local_settings.py
 
 .env
+### Database ###
+db.sqlite3
+*.jpg
+*.png
+*.pdf
+*.docx
+*.doc
+static/ckeditor/
+static/admin/
+*.sqlite3
