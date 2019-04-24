@@ -90,12 +90,13 @@ local_settings.py
 
 ### Database ###
 db.sqlite3
-*.jpg
-*.png
-*.pdf
-*.docx
-*.doc
+# *.jpg
+# *.png
+# *.pdf
+# *.docx
+# *.doc
 static/ckeditor/
 static/admin/
 *.sqlite3
+node_modules/
 
