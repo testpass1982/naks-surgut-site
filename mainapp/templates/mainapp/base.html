@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load staticfiles %}{% load sass_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   {% block title  %}
-  <title>ЗАПАДНО-СИБИРСКИЙ 
+  <title>ЗАПАДНО-СИБИРСКИЙ
       ЦЕНТР ОЦЕНКИ КВАЛИФИКАЦИЙ</title>
   {% endblock  %}
 
@@ -28,7 +28,7 @@
 
   <!-- <link rel="stylesheet" href="fonts/font.css"> -->
   {% block css  %}
-  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% sass_src 'scss/style.scss' %}">
   <link rel="stylesheet" href="{% static 'css/animate.css' %}">
   <link rel="stylesheet" href="{% static 'css/modal.css' %}">
   {% endblock  %}
@@ -41,7 +41,9 @@
 {% include 'mainapp/includes/header.html' %}
 {% include 'mainapp/includes/modal-windows.html' %}
 {% include 'mainapp/includes/menu.html' %}
-{% include 'mainapp/includes/bg__header__block.html' %}
+{% if request.resolver_match.url_name == 'main' %}
+  {% include 'mainapp/includes/bg__header__block.html' %}
+{% endif %}
 
 
 {% block content  %}

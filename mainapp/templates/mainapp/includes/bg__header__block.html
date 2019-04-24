@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %}{% load link_holders %}
 <!-- BG info -->
 <div class="bg-block-01">
   <div class="bg">
@@ -33,21 +33,61 @@
               <p class="head__information">Информация</p>
             </div>
 
-            <div class="block__obl__proff">
-              <div class="block__inform__name">
-                <p class="pf__text text-left">
-                  <a href="/detailview/post/7#news__box">Профстандарты <br> в области сварки</a>
-                </p>
+            <div class="row align-items-stretch">
+              <div class="col-xl-6">
+                <div class="block__inform__name">
+                  <p class="pf__text">
+                    <a href="{% link_holder 'PS' %}">{% title_holder 'PS' %}</a>
+                  </p>
+                </div>
               </div>
+
+              <div class="col-xl-6">
+                <div class="block__inform__name">
+                  <p class="pf__text">
+                  {% autoescape off %}
+                    <a href="{% link_holder 'ATT_SV' %}">{% title_holder 'ATT_SV' %}</a>
+                  {% endautoescape %}
+                  </p>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="block__inform__name">
+                  <p class="pf__text">
+                    <a href="{% link_holder 'ATT_SP' %}">{% title_holder 'ATT_SP' %}</a>
+                  </p>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="block__inform__name">
+                  <p class="pf__text">
+                  {% autoescape off %}
+                    <a href="{% link_holder 'ATTSM' %}">{% title_holder 'ATTSM' %}</a>
+                  {% endautoescape %}
+                  </p>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="block__inform__name">
+                  <p class="pf__text">
+                  {% autoescape off %}
+                    <a href="{% link_holder 'ATTSO' %}">{% title_holder 'ATTSO' %}</a>
+                  {% endautoescape %}
+                  </p>
+                </div>
+              </div>
+              <div class="col-xl-6">
+                <div class="block__inform__name">
+                  <p class="pf__text">
+                    {% autoescape off %}
+                    <a href="{% link_holder 'ATTST' %}">{% title_holder 'ATTST' %}</a>
+                    {% endautoescape %}
+                  </p>
+                </div>
+              </div>
+
             </div>
 
-            <div class="block__obl__proff">
-              <div class="block__inform__name">
-                <p class="pf__text text-left">
-                  <a href="/detailview/post/8#news__box">Область <br> деятельности</a>
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </div>

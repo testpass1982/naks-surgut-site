@@ -400,10 +400,12 @@ border: 1px red solid;
 }
 
 .block__inform__name {
-  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 85%;
   background-color: #fff;
   border-radius: 3px;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
 }
 
 .pf__text a {
@@ -412,6 +414,10 @@ border: 1px red solid;
   padding: 20px 35px;
   text-decoration: none;
   display: block;
+  &:hover {
+    margin-left: 5px;
+    transition: 0.2s ease;
+  }
 }
 
 @media screen and (max-width: 1125px) {
@@ -420,10 +426,6 @@ border: 1px red solid;
   }
 }
 
-.pf__text:hover {
-  margin-left: 5px;
-  transition: 0.2s ease;
-}
 
 .button__uslugi {
   border: 1px solid #fff;

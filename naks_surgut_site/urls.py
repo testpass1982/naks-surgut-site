@@ -26,6 +26,7 @@ urlpatterns = [
     re_path(r'details/$', mainapp.details, name='post_details'),
     path('detailview/<slug:content>/<slug:pk>',
          mainapp.details, name='detailview'),
+    path('details/<slug:pk>', mainapp.content_details, name='details'),
     # path('create/<slug:content_type>', mainapp.create_factory, name='create'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('admin/', admin.site.urls),

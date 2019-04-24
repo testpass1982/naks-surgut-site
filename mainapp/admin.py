@@ -4,7 +4,7 @@ from django.utils.encoding import force_text
 from django.utils.html import format_html
 
 from .models import Post, Category, Tag, Document, PostPhoto, Article, Message, Contact
-from .models import Staff, Registry
+from .models import Staff, Registry, SidePanel
 # Register your models here.
 
 
@@ -90,10 +90,10 @@ class PostAdmin(admin.ModelAdmin):
     # save_on_top = True
     view_on_site = True
 
-    fields = ['id', 'title', 'tags', 'category', 'author', 'short_description', 'text', get_url,
+    fields = ['id', 'title', 'url_code', 'tags', 'category', 'author', 'short_description', 'text', 'side_panel', get_url,
               'created_date', 'published_date', 'publish_on_main_page', 'secondery_main', 'publish_on_news_page']
     readonly_fields = ['id', get_url]
-    list_display = ['title', 'category',
+    list_display = ['title', 'category', 'url_code',
                     'created_date', 'publish_on_main_page', 'publish_on_news_page']
     inlines = [PostPhotoInline, DocumentInline]
 
@@ -115,9 +115,14 @@ class PostPhotoAdmin(admin.ModelAdmin):
 class MessageAdmin(admin.ModelAdmin):
     list_display = ['title', 'typeof', 'params', 'sender_email', 'status']
 
+#admin.site.register(Contact)
+@admin.register(Contact)
+class CantactAdmin(admin.ModelAdmin):
+    list_display = ['title', 'description', 'number']
+
 
 admin.site.register(Tag)
 admin.site.register(Category)
-admin.site.register(Contact)
 admin.site.register(Staff)
 admin.site.register(Registry)
+admin.site.register(SidePanel)

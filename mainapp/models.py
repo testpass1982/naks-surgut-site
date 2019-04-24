@@ -45,6 +45,7 @@ class Category(models.Model):
 class ContentMixin(models.Model):
     '''base class for Post, Article and Documents'''
     title = models.CharField(u'Название', max_length=200)
+    url_code = models.CharField(u'Код ссылки', max_length=30, blank=True, default='НЕ УКАЗАН')
     short_description = models.CharField(
         u'Краткое описание', max_length=200, blank=True)
     tags = models.ManyToManyField(Tag, verbose_name='Тэги')
@@ -60,6 +61,16 @@ class ContentMixin(models.Model):
     class Meta:
         abstract = True
 
+class SidePanel(models.Model):
+    title = models.CharField(u'Название', max_length=200)
+    html = RichTextUploadingField(verbose_name='Контент')
+
+    class Meta:
+        verbose_name = 'Боковая панель'
+        verbose_name_plural = 'Боковые панели'
+
+    def __str__(self):
+        return self.title
 
 class Post(ContentMixin):
     '''child of contentmixin'''
@@ -69,6 +80,8 @@ class Post(ContentMixin):
         verbose_name="Опубликовать в ленте новостей", default=False)
     secondery_main = models.BooleanField(
         verbose_name="Опубликовать как недавние ", default=False)
+    side_panel = models.ForeignKey(SidePanel, verbose_name='Боковая панель',
+                blank=True, null=True, on_delete=models.SET_NULL)
 
     class Meta:
         ordering = ['created_date']
@@ -116,6 +129,7 @@ class Document(models.Model):
                                         'pdf', 'docx', 'doc', 'jpg', 'jpeg'],
                                     message="Неправильный тип файла, используйте\
                                         PDF, DOCX, DOC, JPG, JPEG")])
+    url_code = models.CharField(u'Код ссылки', max_length=30, blank=True, default='НЕ УКАЗАН')
     uploaded_at = models.DateTimeField(
         verbose_name='Загружен', default=timezone.now)
     tags = models.ManyToManyField(Tag, verbose_name='Тэги', blank=True)

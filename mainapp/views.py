@@ -156,6 +156,15 @@ def details(request, pk=None, content=None):
 
     return render(request, 'mainapp/details.html', context)
 
+def content_details(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    side_panel = post.side_panel
+    content = {
+        'title': 'Детальный просмотр',
+        'post': post,
+        'side_panel': side_panel,
+    }
+    return render(request, 'mainapp/content_details.html', content)
 
 def create_factory(request, content_type):
 
