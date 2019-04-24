@@ -3,7 +3,7 @@
 
 {% block content %}
 
-  
+
   <!-- News block -->
   <div class="news__box" id="news__box">
     <div class="container">
@@ -28,36 +28,40 @@
               </div>
               <div class="col-xs-12 offset-lg-1 col-lg-6">
                 <div class="d-flex flex-row flex-xs-wrap flex-nowrap justify-content-between">
-                  
+
                     <div class="social__seti d-flex justify-content-between">
                       <a class="p-1" href="#"><img src="{% static '/img/facebook.png' %}"  title="Поделиться Facebook" target="_blank" alt=""></a>
                       <a class="p-1" href="#"><img src="{% static '/img/vkontakte.png' %}" title="Поделиться Вконтакте" target="_blank" alt=""></a>
                       <a class="p-1" href="#"><img src="{% static '/img/twitter.png' %}" title="Поделиться Твиттер" target="_blank" alt=""></a>
                       <a class="p-1" href="#"><img src="{% static '/img/google.png' %}" title="Поделиться Гугл +" target="_blank" alt=""></a>
                     </div>
-                  
-                  
+
+
                     <a href="mailto:?subject=Новость НАКС">
                       <div class="email" title="Отправить по почте">
                         <img src="{% static '/img/email.png' %}"  alt="">
                       </div>
                     </a>
 
-                  
+
                     <a href="" onclick="window.print();" title="Распечатать новость">
                       <div class="print">
                         <img src="{% static '/img/print.png' %}" alt="">
                       </div>
                     </a>
-                 
+
                 </div>
               </div>
             </div>
-            <h2 class="mt-3 mb-3">{{ post.title }}</h2>
+            <h2 class="mt-3 mb-3">
+            {% autoescape off %}
+            {{ post.title }}
+            {% endautoescape %}
+            </h2>
             <div class="header__top__news__text"> </div>
 
              {{ post.text|safe }}
-           
+
             <div class="footer__to__news">
             {% if documents %}
 
@@ -65,12 +69,12 @@
                   <button class="soglashenie__button">
                       <a href="{{document.document.url}}" target="_blank" class="soglashenie__button__text" title="{{document.title}}">{{ document.title }}
                         <img src="{% static '/img/download__icon.png' %}" alt="" class="download__icon"></a>
-                    </button>  
-              
-              {% endfor %} 
-            
+                    </button>
+
+              {% endfor %}
+
             {% endif %}
-                          
+
             </div>
           </div>
         </div>
@@ -80,10 +84,10 @@
 
         {% if images %}
 
-          <div class="gallery__news">  
+          <div class="gallery__news">
               <div class="header__tag__theme">
                   Фотографии по теме
-                </div>         
+                </div>
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
               <ol class="carousel-indicators">
             {% for image in images %}
@@ -118,26 +122,26 @@
           <h3>
             Другие новости:
           </h3>
-          
+
         {% if side_related_posts %}
         {% for obj in side_related_posts %}
 
-          
+
           <a href="{% url 'detailview' 'post' obj.post.pk %}#news__box">
             <div class="block__news__one">
               <div class="block__img__news" style="background: url({{ obj.picture.image.url }}) no-repeat; background-size: cover;">
                 <div class="block__news__box">
-        
+
                   <div class="container">
 
 
-                    <div class="side__related__tag">{{ obj.post.created_date }}          
+                    <div class="side__related__tag">{{ obj.post.created_date }}
                     {% for tag in obj.post.tags.all %}
                     <i class="fa fa-hashtag"></i>{{ tag.name }}&nbsp;
                     {% endfor %}
-                    </div>    
+                    </div>
                   </div>
-                  
+
                   <div class="die__for__text">
                     <p class="text__to__news">
                       {{ obj.post.title }}
@@ -147,22 +151,22 @@
               </div>
             </div>
           </a>
-        
+
         {% endfor %}
 
         {% endif %}
-         
 
-          
+
+
 
           <a href="{% url 'news' %}" class="all__news">
               Все новости <img src="{% static 'img/arrow__next-01.png' %}" alt="">
-            </a>          
+            </a>
         </div>
-        
+
       </div>
-      
-     
+
+
 
       <button class="button__back__to__main">
         <a href="{% url 'main' %}" class="button__back__to__main__text text-align-center">

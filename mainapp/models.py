@@ -41,6 +41,18 @@ class Category(models.Model):
     def __unicode__(self):
         return self.name
 
+class DocumentCategory(models.Model):
+    name = models.CharField(u'Название категории', max_length=64)
+    number = models.SmallIntegerField(verbose_name='Порядок сортировки',
+                                    null=True, blank=True, default=None)
+
+    class Meta:
+        verbose_name = "Категория документа"
+        verbose_name_plural = "Категории документов"
+
+    def __str__(self):
+        return self.name
+
 
 class ContentMixin(models.Model):
     '''base class for Post, Article and Documents'''
@@ -80,6 +92,10 @@ class Post(ContentMixin):
         verbose_name="Опубликовать в ленте новостей", default=False)
     secondery_main = models.BooleanField(
         verbose_name="Опубликовать как недавние ", default=False)
+    service_description = models.BooleanField(u'Описание услуги', default=False, help_text="""
+                    Когда выбрана эта опция автоматически будет создан пункт меню<br>
+                    в разделе "Услуги". Код ссылки при этом можно не использовать.
+    """)
     side_panel = models.ForeignKey(SidePanel, verbose_name='Боковая панель',
                 blank=True, null=True, on_delete=models.SET_NULL)
 
@@ -129,6 +145,8 @@ class Document(models.Model):
                                         'pdf', 'docx', 'doc', 'jpg', 'jpeg'],
                                     message="Неправильный тип файла, используйте\
                                         PDF, DOCX, DOC, JPG, JPEG")])
+    category = models.ForeignKey(DocumentCategory, verbose_name='Категория документа',
+                    blank=True, null=True, on_delete=models.SET_NULL)
     url_code = models.CharField(u'Код ссылки', max_length=30, blank=True, default='НЕ УКАЗАН')
     uploaded_at = models.DateTimeField(
         verbose_name='Загружен', default=timezone.now)
@@ -141,6 +159,7 @@ class Document(models.Model):
                              null=True)
     publish_on_main_page = models.BooleanField(
         verbose_name="Опубиковать на главной", default=False)
+    number = models.SmallIntegerField(verbose_name="Порядок сортировки", null=True, blank=True, default=None)
 
     class Meta:
         verbose_name = "Документ"

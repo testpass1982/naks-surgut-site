@@ -92,6 +92,7 @@ class DocumentSearchForm(forms.Form):
         attrs={'class': 'form__control__doc',
                'placeholder': 'Введите название документа'}
     ))
+    document_category = forms.CharField(max_length=50, required=False)
 
 class SearchRegistryForm(forms.Form):
     fio = forms.CharField(max_length=64, required=False, widget=forms.TextInput(

@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %}{% load link_holders %}
 <!-- Меню -->
 <div class="menu__background">
   <div class="container ">
@@ -32,28 +32,21 @@
                   <a class="nav__link__two dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Группа компаний</a>
                   <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/detailview/post/8#news__box">Область
-                      деятельности</a>
-                    <a class="dropdown-item" href="/detailview/post/6#news__box">О Нас</a>
+                    <a class="dropdown-item" href="{% link_holder 'ZAPSIBCOK' %}">{% title_holder 'ZAPSIBCOK' %}</a>
+                    <a class="dropdown-item" href="{% link_holder 'ABOUT_US' %}">{% title_holder 'ABOUT_US' %}</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav__link__two dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Услуги</a>
                   <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/detailview/post/11#news__box">Аттестация
-                      сварщиков
-                      и специалистов <br> сварочного производства</a>
-                    <a class="dropdown-item" href="/detailview/post/12#news__box">Оценка квалификаций</a>
-                    <a class="dropdown-item" href="/detailview/post/13#news__box">Неразрушающий контроль</a>
-                    <a class="dropdown-item" href="/detailview/post/14#news__box">Аттестация сварочного <br>
-                      оборудования
-                    </a>
-                    <a class="dropdown-item" href="/detailview/post/15#news__box">Экспертиза промышленной безопасности</a>
-                    <a class="dropdown-item" href="/detailview/post/16#news__box">Специальная подготовка сварщиков <br>и специалистов сварочного
-                      производства</a>
-                    <a class="dropdown-item" href="/detailview/post/17#news__box">Аттестация сварочных материалов</a>
-                    <a class="dropdown-item" href="/detailview/post/18#news__box">Аттестация сварочных технологий</a>
+                    {% if service_pages.0.pk %}
+                      {% for page in service_pages %}
+                      <a class="dropdown-item" href="{% url 'details' page.pk %}">{{ page.title }}</a>
+                      {% endfor %}
+                    {% else %}
+                      <a class="dropdown-item" href="#">{{ service_pages.message }}</a>
+                    {% endif %}
 
                   </div>
                 </li>
@@ -61,9 +54,13 @@
                   <a class="nav__link__two dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Документы</a>
                   <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{% url 'documents'%}#rd_id">Руководящие документы</a>
-                    <a class="dropdown-item" href="{% url 'documents'%}#nd_id">Нормативные документы</a>
-                    <a class="dropdown-item" href="{% url 'documents'%}#sg_id">Соглашения</a>
+                    {% if document_categories.0.pk %}
+                      {% for category in document_categories %}
+                      <a class="dropdown-item" href="{% url 'documents'%}#category_{{ category.pk }}">{{ category.name }}</a>
+                      {% endfor %}
+                    {% else %}
+                      <a class="dropdown-item" href="#">{{ document_categories.message }}</a>
+                    {% endif %}
                   </div>
                 </li>
                 <li class="nav-item dropdown">

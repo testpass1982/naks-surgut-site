@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.utils.encoding import force_text
 from django.utils.html import format_html
 
-from .models import Post, Category, Tag, Document, PostPhoto, Article, Message, Contact
+from .models import Post, Category, Tag, Document, DocumentCategory, PostPhoto, Article, Message, Contact
 from .models import Staff, Registry, SidePanel
 # Register your models here.
 
@@ -70,7 +70,7 @@ get_tag_list.short_description = 'Список тэгов'
 
 @admin.register(Document)
 class DocumentAdmin(admin.ModelAdmin):
-    list_display = ['title', get_tag_list, 'publish_on_main_page']
+    list_display = ['title', get_tag_list, 'category', 'publish_on_main_page']
 
 
 @admin.register(Article)
@@ -90,8 +90,9 @@ class PostAdmin(admin.ModelAdmin):
     # save_on_top = True
     view_on_site = True
 
-    fields = ['id', 'title', 'url_code', 'tags', 'category', 'author', 'short_description', 'text', 'side_panel', get_url,
-              'created_date', 'published_date', 'publish_on_main_page', 'secondery_main', 'publish_on_news_page']
+    fields = ['id', 'title', 'service_description', 'url_code', 'tags', 'category', 'author', 'short_description', 'text', 'side_panel', get_url,
+              'created_date', 'published_date', 'publish_on_main_page',
+              'secondery_main', 'publish_on_news_page', ]
     readonly_fields = ['id', get_url]
     list_display = ['title', 'category', 'url_code',
                     'created_date', 'publish_on_main_page', 'publish_on_news_page']
@@ -126,3 +127,4 @@ admin.site.register(Category)
 admin.site.register(Staff)
 admin.site.register(Registry)
 admin.site.register(SidePanel)
+admin.site.register(DocumentCategory)

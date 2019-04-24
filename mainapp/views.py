@@ -7,13 +7,14 @@ from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Post, PostPhoto, Tag, Category, Document, Article, Message, Contact
 from .models import Registry
-from .models import Staff
+from .models import Staff, DocumentCategory
 from .forms import PostForm, ArticleForm, DocumentForm
 from .forms import SendMessageForm, SubscribeForm, AskQuestionForm, DocumentSearchForm, SearchRegistryForm
 from .adapters import MessageModelAdapter
 from .message_tracker import MessageTracker
 from .utilites import UrlMaker
 from .registry_import import Importer, data_url
+from django.db.models import Q
 # Create your views here.
 
 
@@ -270,35 +271,30 @@ def documents(request):
             print('REQUEST_GET', request.GET)
             search_form = DocumentSearchForm(request.GET)
             if search_form.is_valid():
-                search_result = Document.objects.filter(
-                    title__contains=request.GET.get('document_name')).order_by('-created_date')
+                query = Q()
+                if request.GET.get('document_name') != '':
+                    query &= Q(title__contains=request.GET.get('document_name'))
+                if request.GET.get('document_category')!='':
+                    query &= Q(category__name=request.GET.get('document_category'))
+                search_result = Document.objects.filter(query).order_by('-created_date')
                 print('SEARCH_RESULT', search_result)
-                search_result_content['search_result'] = search_result
-    accreditation_list = Document.objects.filter(
-        tags__in=Tag.objects.filter(name='Аккредитация САСв'))
-    cok_accreditation_list = Document.objects.filter(
-        tags__in=Tag.objects.filter(name='Допуск ЦОК'))
-    os_doc_list = Document.objects.filter(
-        tags__in=Tag.objects.filter(name='Оценочное средство'))
-    norm_doc_list = Document.objects.filter(
-        tags__in=Tag.objects.filter(name='Нормативный документ'))
-    sogl_doc_list = Document.objects.filter(
-        tags__in=Tag.objects.filter(name='Соглашение'))
-    # print(accreditation_list)
-    # print(cok_accreditation_list)
-    # print(os_doc_list)
+                if search_result.count() == 0:
+                    search_result_content['search_result'] = 'not_found'
+                else:
+                    search_result_content['search_result'] = search_result
+            else:
+                print('ERRORS', search_form.errors)
 
     content = {
         'title': 'Документы',
-        'accreditation_list': accreditation_list,
-        'cok_accreditation_list': cok_accreditation_list,
-        'os_doc_list': os_doc_list,
-        'norm_doc_list': norm_doc_list,
-        'sogl_doc_list': sogl_doc_list,
+        'documents': Document.objects.all().order_by('number'),
+        'categories': DocumentCategory.objects.all().order_by('number'),
         'search_form': search_form
     }
     if search_result_content:
         content.update(search_result_content)
+        content['search_form'] = DocumentSearchForm(request.GET)
+        # import pdb; pdb.set_trace()
         print('CONTENT WITH SEARCH', content)
     return render(request, 'mainapp/documents.html', content)
 

@@ -53,7 +53,11 @@
                 </div>
               </div>
             </div>
-            <h2 class="mt-3 mb-3">{{ post.title }}</h2>
+            <h2 class="mt-3 mb-3">
+            {% autoescape off %}
+            {{ post.title }}
+            {% endautoescape %}
+            </h2>
             <div class="header__top__news__text"> </div>
 
              {{ post.text|safe }}

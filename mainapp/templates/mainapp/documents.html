@@ -6,204 +6,150 @@
 
 {% comment %} documens block {% endcomment %}
 <div class="doc__box" id="doc-box">
-    <div class="container">
-      <button class="button__back__to__main">
-        <a href="{% url 'main' %}" class="button__back__to__main__text text-align-center">
-          <img src="{% static '/img/arrow__next-01.png' %}" class="arrow__back__one" alt=""> На главную
-        </a>
-      </button>
+  <div class="container">
+    <button class="button__back__to__main">
+      <a href="{% url 'main' %}" class="button__back__to__main__text text-align-center">
+        <img src="{% static '/img/arrow__next-01.png' %}" class="arrow__back__one" alt=""> На главную
+      </a>
+    </button>
 
 
+    <div class="row">
+      <div class="col-xl-4">
+        <p class="header__document" id="rukovodyawie__doc">
+          Документы
+        </p>
+      </div>
+    </div>
+
+    <div class="form__search__block" id="form__search__id">
       <div class="row">
-        <div class="col-xl-4">
-          <p class="header__document" id="rukovodyawie__doc">
-            Документы
-          </p>
-        </div>
-      </div>
+        <div class="col-sm-8">
+          <div class="form__search__document">
+            <form class="search-docs border-top border-bottom py-4 py-sm-5 mb-4" method="get"
+              action="#form__search__id">
+              <div class="form-row mb-4">
+                <div class="col-sm-6 col-xl-4 mb-4 mb-sm-0">
+                  <label for="search__name__text">Поиск по названию</label>
+                  {{ search_form.document_name }}
+                </div>
+                <div class="col-sm-6 col-xl-4">
+                  <label for="type__of__document">Вид документа</label>
+                  <select name="document_category" id="type__of__document" class="drop__down__form">
 
-      <div class="form__search__block" id="form__search__id">
-        <div class="row">
-          <div class="col-sm-8">
-            <div class="form__search__document">
-              <form class="search-docs border-top border-bottom py-4 py-sm-5 mb-4" method="get" action="#form__search__id">
-                <div class="form-row mb-4">
-                  <div class="col-sm-6 col-xl-4 mb-4 mb-sm-0">
-                    <label for="search__name__text">Поиск по названию</label>
-                    {{ search_form.document_name }}
-                  </div>
-                  <div class="col-sm-6 col-xl-4">
-                    <label for="type__of__document">Вид документа</label>
-                    <select id="type__of__document" class="drop__down__form">
-                      <option selected>Руководящие документы</option>
-                      <option>Нормативные документы</option>
-                      <option>Соглашения</option>
-                    </select>
-                  </div>
+                  {% comment %} categories {% endcomment %}
+
+                    <option></option>
+                    {% for cat in categories %}
+                    <option>{{ cat.name }}</option>
+                    {% endfor %}
+
+                  {% comment %} end categories {% endcomment %}
+
+
+                  </select>
                 </div>
-                <div class="d-flex flex-row">
-                  <button type="submit" class="button__search__document" name="search_document" id="header__doc">
-                    Найти
-                  </button>
-                  {% if 'search_document' in request.build_absolute_uri %}
-                      <a href="{% url 'documents' %}#form__search__id" class="btn btn-link" name='reset_form'>Сбросить</a>
-                  {% endif %}
-                </div>
-              </form>
-            </div>
+              </div>
+              <div class="d-flex flex-row">
+                <button type="submit" class="button__search__document" name="search_document" id="header__doc">
+                  Найти
+                </button>
+                {% if 'search_document' in request.build_absolute_uri %}
+                <a href="{% url 'documents' %}#form__search__id" class="btn btn-link" name='reset_form'>Сбросить</a>
+                {% endif %}
+              </div>
+            </form>
           </div>
-
         </div>
-      </div>
 
-      {% if search_result %}
+      </div>
+    </div>
+    {% if search_result %}
+      {% if search_result == 'not_found' %}
+          <h4>Ничего не найдено</h4>
+        {% else %}
           <div class="alert alert-success">
-           Найдено документов:  <strong>{{ search_result.count }}</strong>
+            Найдено документов: <strong>{{ search_result.count }}</strong>
           </div>
           <h4>Результаты поиска:</h4>
           {% for document in search_result %}
-          {% comment %} <div class="alert alert-success">
-                <a href="document.document.url">{{document.title}}</a>
-          </div> {% endcomment %}
-
-                <div class="background__for__document">
-                  <div class="row">
-                    <div class="col-xl-1 col-sm-2 col-md-2 align-self-center">
-                      <img src="{% static '/img/icon_pdf.png' %}" class="doc__icon" alt="Иконка .pdf">
-                    </div>
-                    <div class="col-sm-8 align-self-center">
-                      <p class="document__name__text">
-                        {{ document.title }}
-                      </p>
-                    </div>
-                    <div class="col-sm-12 col-md-12 col-xl-3">
-                      <div class="buttons__documents text-right" >
-                        <a href="{{ document.document.url }}"  id="link-modal-{{ document.pk }}" class="button__download__document" download="">Скачать</a>
-                        <button id="to-modal-{{ document.pk }}" class="button__viev__document" data-toggle="modal" data-target="#document_preview_modal" >Просмотреть</button>
-                      </div>
-                    </div>
+            <div class="background__for__document">
+              <div class="row">
+                <div class="col-xl-1 col-sm-2 col-md-2 align-self-center">
+                  <img src="{% static '/img/icon_pdf.png' %}" class="doc__icon" alt="Иконка .pdf">
+                </div>
+                <div class="col-sm-8 align-self-center">
+                  <p class="document__name__text">
+                    {{ document.title }}
+                  </p>
+                </div>
+                <div class="col-sm-12 col-md-12 col-xl-3">
+                  <div class="buttons__documents text-right">
+                    <a href="{{ document.document.url }}" id="link-modal-{{ document.pk }}" class="button__download__document"
+                      download="">Скачать</a>
+                    <button id="to-modal-{{ document.pk }}" class="button__viev__document" data-toggle="modal"
+                      data-target="#document_preview_modal">Просмотреть</button>
                   </div>
                 </div>
-                {% include 'mainapp/includes/document-preview-modal.html' %}
-      {% endfor %}
-
+              </div>
+            </div>
+            {% include 'mainapp/includes/document-preview-modal.html' %}
+          {% endfor %}
       {% endif %}
+    {% endif %}
 
-      {% if search_result %}
-      <h3>
-        Не нашли, что искали? Вот весь список документов на сайте:
-      </h3>
-      <div class="row">
-        <div class="col-sm-8" id="selected">
-          <p id="rd_id" class="name__selected__document">
-            Руководящие документы
-          </p>
-        </div>
+    {% if search_result %}
+    <h3>
+      Не нашли, что искали? Вот весь список документов на сайте:
+    </h3>
+    <div class="row">
+      <div class="col-sm-8" id="selected">
       </div>
-
-
-      {% else %}
-      <div class="row">
-        <div class="col-sm-8" id="selected">
-          <p id="rd_id" class="name__selected__document">
-            Руководящие документы
-          </p>
-        </div>
-      </div>
-      {% endif %}
-
-
-    {% for document in accreditation_list %}
-      <div class="background__for__document">
-        <div class="row">
-          <div class="col-xl-1 col-sm-2 col-md-2 align-self-center">
-            <img src="{% static '/img/icon_pdf.png' %}" class="doc__icon" alt="Иконка .pdf">
-          </div>
-          <div class="col-sm-8 align-self-center">
-            <p class="document__name__text">
-              {{ document.title }}
-            </p>
-          </div>
-          <div class="col-sm-12 col-md-12 col-xl-3">
-            <div class="buttons__documents text-right" >
-              <a href="{{ document.document.url }}"  id="link-modal-{{ document.pk }}" class="button__download__document" download="">Скачать</a>
-              <button id="to-modal-{{ document.pk }}" class="button__viev__document" data-toggle="modal" data-target="#document_preview_modal" >Просмотреть</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {% include 'mainapp/includes/document-preview-modal.html' %}
-      {% endfor %}
-
-      <div class="row">
-        <div class="col-sm-8" id="selected">
-          <p id="nd_id" class="name__selected__document">
-            Нормативные документы
-          </p>
-        </div>
-      </div>
-
-    {% for document in norm_doc_list %}
-      <div class="background__for__document">
-        <div class="row">
-          <div class="col-xl-1 col-sm-2 col-md-2 align-self-center">
-            <img src="{% static '/img/icon_pdf.png' %}" class="doc__icon" alt="Иконка .pdf">
-          </div>
-          <div class="col-sm-8 align-self-center">
-            <p class="document__name__text">
-              {{ document.title }}
-            </p>
-          </div>
-          <div class="col-sm-12 col-md-12 col-xl-3">
-            <div class="buttons__documents text-right" >
-              <a href="{{ document.document.url }}"  id="link-modal-{{ document.pk }}" class="button__download__document" download="">Скачать</a>
-              <button id="to-modal-{{ document.pk }}" class="button__viev__document" data-toggle="modal" data-target="#document_preview_modal" >Просмотреть</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {% include 'mainapp/includes/document-preview-modal.html' %}
-      {% endfor %}
-
-
-
-      <div class="row">
-        <div class="col-sm-8" id="selected">
-          <p id="sg_id" class="name__selected__document">
-          Соглашения</p>
-        </div>
-      </div>
-
-    {% for document in sogl_doc_list %}
-      <div class="background__for__document">
-        <div class="row">
-          <div class="col-xl-1 col-sm-2 col-md-2 align-self-center">
-            <img src="{% static '/img/icon_pdf.png' %}" class="doc__icon" alt="Иконка .pdf">
-          </div>
-          <div class="col-sm-8 align-self-center">
-            <p class="document__name__text">
-              {{ document.title }}
-            </p>
-          </div>
-          <div class="col-sm-12 col-md-12 col-xl-3">
-            <div class="buttons__documents text-right" >
-              <a href="{{ document.document.url }}"  id="link-modal-{{ document.pk }}" class="button__download__document" download="">Скачать</a>
-              <button id="to-modal-{{ document.pk }}" class="button__viev__document" data-toggle="modal" data-target="#document_preview_modal" >Просмотреть</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      {% include 'mainapp/includes/document-preview-modal.html' %}
-      {% endfor %}
-
-
-      <button class="button__back__to__main">
-        <a href="{% url 'main' %}" class="button__back__to__main__text text-align-center">
-          <img src="{% static '/img/arrow__next-01.png' %}" class="arrow__back__one" alt=""> На главную
-        </a>
-      </button>
     </div>
+    {% endif %}
+    <div class="container">
+            {% for category in categories %}
+        <p id="category_{{ category.pk }}"class="name__selected__document">
+          {{ category.name }}
+        </p>
 
+          {% for document in documents %}
+            {% if document.category == category %}
+        <div class="background__for__document">
+          <div class="row">
+            <div class="col-xl-1 col-sm-2 col-md-2 align-self-center">
+              <img src="{% static '/img/icon_pdf.png' %}" class="doc__icon" alt="Иконка .pdf">
+            </div>
+            <div class="col-sm-8 align-self-center">
+              <p class="document__name__text">
+                {{ document.title }}
+              </p>
+            </div>
+            <div class="col-sm-12 col-md-12 col-xl-3">
+              <div class="buttons__documents text-right">
+                <a href="{{ document.document.url }}" id="link-modal-{{ document.pk }}"
+                  class="button__download__document" download="">Скачать</a>
+                <button id="to-modal-{{ document.pk }}" class="button__viev__document" data-toggle="modal"
+                  data-target="#document_preview_modal">Просмотреть</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% include 'mainapp/includes/document-preview-modal.html' %}
+        {% endif %}
+
+       {% endfor %}
+      {% endfor %}
+
+      </div>
+
+    <button class="button__back__to__main">
+      <a href="{% url 'main' %}" class="button__back__to__main__text text-align-center">
+        <img src="{% static '/img/arrow__next-01.png' %}" class="arrow__back__one" alt=""> На главную
+      </a>
+    </button>
   </div>
+
+</div>
 
 {% endblock  %}
