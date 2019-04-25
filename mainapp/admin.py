@@ -126,10 +126,14 @@ class CantactAdmin(admin.ModelAdmin):
 class ChunkAdmin(admin.ModelAdmin):
     list_display = ['title', 'html']
 
+# admin.site.register(DocumentCategory)
+@admin.register(DocumentCategory)
+class DocumentCategoryAdmin(admin.ModelAdmin):
+    list_display = ['name', 'number']
+
 admin.site.register(Tag)
 admin.site.register(Category)
 admin.site.register(Staff)
 admin.site.register(Registry)
 admin.site.register(SidePanel)
-admin.site.register(DocumentCategory)
 admin.site.register(ProfStandard)
