@@ -98,6 +98,8 @@ class Post(ContentMixin):
     """)
     side_panel = models.ForeignKey(SidePanel, verbose_name='Боковая панель',
                 blank=True, null=True, on_delete=models.SET_NULL)
+    number = models.SmallIntegerField(verbose_name="Порядок сортировки", null=True, blank=True, default=None)
+
 
     class Meta:
         ordering = ['created_date']
@@ -290,7 +292,7 @@ class ProfStandard(models.Model):
     reg_number = models.CharField(u'Регистрационный номер', max_length=64, blank=True)
     min_trud_register = models.CharField(u'Приказ минтруда', max_length=300, blank=True)
     file = models.FileField(u'Файл', upload_to='upload/')
-    published_date = models.DateField(default=timezone.now())
+    published_date = models.DateField(default=timezone.now)
 
     class Meta:
         verbose_name = 'Профессиональный стандарт'

@@ -92,10 +92,10 @@ class PostAdmin(admin.ModelAdmin):
 
     fields = ['id', 'title', 'service_description', 'url_code', 'tags', 'category', 'author', 'short_description', 'text', 'side_panel', get_url,
               'created_date', 'published_date', 'publish_on_main_page',
-              'secondery_main', 'publish_on_news_page', ]
+              'secondery_main', 'publish_on_news_page', 'number']
     readonly_fields = ['id', get_url]
-    list_display = ['title', 'category', 'url_code',
-                    'published_date', 'publish_on_main_page', 'publish_on_news_page']
+    list_display = ['title', 'service_description' , 'url_code',
+                    'published_date', 'publish_on_main_page', 'publish_on_news_page', 'number']
     inlines = [PostPhotoInline, DocumentInline]
 
     def view_on_site(self, obj):
