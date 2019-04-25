@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 from django.utils import timezone
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Post, PostPhoto, Tag, Category, Document, Article, Message, Contact
-from .models import Registry
+from .models import Registry, ProfStandard
 from .models import Staff, DocumentCategory
 from .forms import PostForm, ArticleForm, DocumentForm
 from .forms import SendMessageForm, SubscribeForm, AskQuestionForm, DocumentSearchForm, SearchRegistryForm
@@ -374,3 +374,11 @@ def reestrsp(request, type=None):
         content = None
 
     return render(request, 'mainapp/reestr.html', content)
+
+def profstandards(request):
+    title = 'Профстадарты в области сварки'
+    content = {
+        'title': title,
+        'profstandards': ProfStandard.objects.all().order_by('-published_date')
+    }
+    return render(request, 'mainapp/profstandards.html', content)

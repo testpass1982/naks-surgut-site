@@ -1,0 +1,42 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}{% load link_holders %}
+{% block content %}
+    <div class="container">
+    {% autoescape off %}
+
+
+    <button class="button__back__to__main">
+      <a href="{% url 'main' %}" class="button__back__to__main__text text-align-center">
+        <img src="{% static '/img/arrow__next-01.png' %}" class="arrow__back__one" alt=""> На главную
+      </a>
+    </button>
+        <div class="col-xl-2"></div>
+
+        <div class="row">
+            <div class="col-xl-12">
+                <p class="header__utverjdenie__standarti">
+                    Утверждённые профессиональные стандарты
+                </p>
+                <div class="ps_text">
+                {% chunk 'PS_PAGE_TEXT' %}
+                </div>
+                {% for ps in profstandards %}
+                        {% include 'mainapp/includes/ps_card.html' %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="col-xl-2"></div>
+
+        <div class="line__otstup"></div>
+    <button class="button__back__to__main">
+      <a href="{% url 'main' %}" class="button__back__to__main__text text-align-center">
+        <img src="{% static '/img/arrow__next-01.png' %}" class="arrow__back__one" alt=""> На главную
+      </a>
+    </button>
+    </div>
+
+
+
+
+    {% endautoescape %}
+{% endblock content %}

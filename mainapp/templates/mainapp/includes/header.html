@@ -1,4 +1,5 @@
-{% load static %}
+{% load static %}{% load link_holders %}
+{% autoescape off %}
 <header class="head">
 
   <div class="container">
@@ -21,10 +22,14 @@
               Открыть
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" target="_blank" href="http://www.naks.ru/assp/reestrac/index.php?ID=541094675">СУР-24АЦ</a>
-              <a class="dropdown-item" target="_blank" href="http://spks.naks.ru/cert/reestr_centers/detail.php?ID=3293611">ЦОК-044</a>
-              <a class="dropdown-item" target="_blank" href="http://www.naks.ru/aso/racso/index.php?ID=414514">АЦСО-10</a>
-              <a class="dropdown-item" target="_blank" href="http://www.naks.ru/ast/racst/index.php?ID=414576">АЦСТ-11</a>
+              <a class="dropdown-item" target="_blank"
+                href="http://www.naks.ru/assp/reestrac/index.php?ID=541094675">СУР-24АЦ</a>
+              <a class="dropdown-item" target="_blank"
+                href="http://spks.naks.ru/cert/reestr_centers/detail.php?ID=3293611">ЦОК-044</a>
+              <a class="dropdown-item" target="_blank"
+                href="http://www.naks.ru/aso/racso/index.php?ID=414514">АЦСО-10</a>
+              <a class="dropdown-item" target="_blank"
+                href="http://www.naks.ru/ast/racst/index.php?ID=414576">АЦСТ-11</a>
             </div>
           </div>
         </div>
@@ -53,27 +58,26 @@
           <img src="{% static 'img/logo__3.png' %}" title="ООО «СибТехСнаб-Сварка»" alt="">
         </div>
       </div>
-      <div class="col-xs-6 col-md-6 col-lg-4 col-lg-2 col-xl-2 ">
+      <div class="col-xs-6 col-md-6 col-lg-4 col-lg-2 col-xl-2">
         <div class="header__number">
-          <p>8 (3462) 21-53-42</p>
-          <p> 8 (3462) 21-53-41</p>
+          {% chunk 'PHONES' %}
         </div>
       </div>
-      <div class="col-xs-6 col-md-8 col-lg-6 col-xl-1">
+      <div class="col-xs-6 col-md-8 col-lg-6 col-xl-2">
         <p class="header__mail">
-          info@acneks.ru</p>
+          {% chunk 'EMAILS' %}
+        </p>
       </div>
 
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
-        <div class="header__buttons-container">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-2">
+        <div class="header__buttons-container d-flex align-items-stretch">
           <button class="button__zayavka">
             <a href="#" data-toggle="modal" data-target="#modal-statement">
               Оставить заявку</a>
           </button>
           <button class="button__system__edo">
-            <a href="https://ac.naks.ru/" target="_blank">
-              <img src="{% static 'img/enter.png' %}" class="enter__icon__edo" alt="">
-              Войти в систему ЭДО</a>
+            <a href="https://ac.naks.ru/" target="_blank"><i class="fa fa-sign-in"></i>
+              Войти в ЭДО</a>
           </button>
         </div>
       </div>
@@ -81,3 +85,4 @@
   </div>
 </div>
 </div>
+{% endautoescape %}

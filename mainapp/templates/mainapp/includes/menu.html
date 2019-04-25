@@ -32,8 +32,11 @@
                   <a class="nav__link__two dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Группа компаний</a>
                   <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="{% link_holder 'ZAPSIBCOK' %}">{% title_holder 'ZAPSIBCOK' %}</a>
                     <a class="dropdown-item" href="{% link_holder 'ABOUT_US' %}">{% title_holder 'ABOUT_US' %}</a>
+                    <a class="dropdown-item" href="{% link_holder 'ZAPSIBCOK' %}">{% title_holder 'ZAPSIBCOK' %}</a>
+                    <a class="dropdown-item" href="{% link_holder 'OOOACNEKS' %}">{% title_holder 'OOOACNEKS' %}</a>
+                    <a class="dropdown-item" href="{% link_holder 'NHPE' %}">{% title_holder 'NHPE' %}</a>
+                    <a class="dropdown-item" href="{% link_holder 'SIBTEHSNAB' %}">{% title_holder 'SIBTEHSNAB' %}</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -67,9 +70,9 @@
                   <a class="nav__link__two dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">Оценка квалификаций в области сварки</a>
                   <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Совет по профессиональным квалификациям в области сварки</a>
-                    <a class="dropdown-item" href="#">Центр оценки квалификации ЦОК-044</a>
-                    <a class="dropdown-item" href="#">Профессиональные стандарты в области сварки</a>
+                    <a class="dropdown-item" href="{% link_holder 'SPKS' %}">{% title_holder 'SPKS' %}</a>
+                    <a class="dropdown-item" href="{% link_holder 'COK044' %}">{% title_holder 'COK044' %}</a>
+                    <a class="dropdown-item" href="{% url 'profstandards' %}">Профессиональные стандарты в области сварки</a>
                   </div>
                 </li>
                 <li class="nav-item active">

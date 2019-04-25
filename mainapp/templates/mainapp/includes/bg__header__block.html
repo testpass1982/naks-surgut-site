@@ -1,5 +1,6 @@
 {% load static %}{% load link_holders %}
 <!-- BG info -->
+{% autoescape off %}
 <div class="bg-block-01">
   <div class="bg">
     <div class="blog-info">
@@ -10,16 +11,11 @@
             <img src="{% static 'img/SASP.png' %}" class="sasp__logo" alt="">
 
             <div class="about__organization__text">
-              <p>Западно-сибирский <br>
-                <strong>центр оценки квалификаций</strong></p>
+              {% chunk 'ORG_NAME' %}
             </div>
 
             <div class="about__organization__text__two">
-              <p class="mb-3"><strong>20 лет</strong> мы занимаемся аттестацией сварочного производства и экспертизой промышленной безопасности.
-              </p>
-              В группу компаний входят ООО "ЗАПАДНО-СИБИРСКИЙ ЦОК" (аттестация персонала сварочного производства и
-              оценка квалификации), "ООО АЦ "НЭКС" (аттестация сварочного оборудования и сварочных технологий), ООО
-              "НЕФТЕХИМПРОМЭКСПЕРТ" (экспертиза промышленной безопасности)
+              {% chunk 'ORG_NAME_TEXT' %}
             </div>
 
             <div class="button__zayavka__online">
@@ -45,9 +41,7 @@
               <div class="col-xl-6">
                 <div class="block__inform__name">
                   <p class="pf__text">
-                  {% autoescape off %}
                     <a href="{% link_holder 'ATT_SV' %}">{% title_holder 'ATT_SV' %}</a>
-                  {% endautoescape %}
                   </p>
                 </div>
               </div>
@@ -61,18 +55,14 @@
               <div class="col-xl-6">
                 <div class="block__inform__name">
                   <p class="pf__text">
-                  {% autoescape off %}
                     <a href="{% link_holder 'ATTSM' %}">{% title_holder 'ATTSM' %}</a>
-                  {% endautoescape %}
                   </p>
                 </div>
               </div>
               <div class="col-xl-6">
                 <div class="block__inform__name">
                   <p class="pf__text">
-                  {% autoescape off %}
                     <a href="{% link_holder 'ATTSO' %}">{% title_holder 'ATTSO' %}</a>
-                  {% endautoescape %}
                   </p>
                 </div>
               </div>
@@ -96,3 +86,4 @@
 </div>
 </div>
 </div>
+{% endautoescape %}

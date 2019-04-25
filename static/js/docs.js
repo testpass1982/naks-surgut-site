@@ -12,7 +12,7 @@ $(document).ready(function ($) {
         return i;
     });
 
-    console.log(buttons);
+    console.log('BUTTONS', buttons);
 
     $(".modal-body").click(function () {
         console.log('body body');
@@ -25,9 +25,6 @@ $(document).ready(function ($) {
         insert_html = '<embed src="' + url + '" width="100%" height="400" type="application/pdf">'
         $(".modal-body").empty();
         $(".modal-body").append(insert_html)
-
-
-
         event.preventDefault();
         jQuery.noConflict();
         $("#document_preview_modal").modal('show');

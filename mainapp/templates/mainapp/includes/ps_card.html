@@ -1,0 +1,36 @@
+                <div class="box__profstandart">
+                    <div class="row">
+                        <div class="col-xl-4">
+                            <p class="head__standart">
+                                Профессиональный стандарт
+                            </p>
+                            <p class="name__standart">
+                                {{ ps.title }}
+                            </p>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-xl-5">
+                            <p class="head__standart text-secondary mb-3 mb-sm-4">Информация о стандарте</p>
+                            <div class="row text-small mb-3">
+                                <div class="col-4">
+                                    <p class="number__standart">Код</p>
+                                    <p class="number__standart">{{ ps.code }}</p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="number__standart">Регистрационный номер</p>
+                                    <p class="number__standart">{{ ps.reg_number }}</p>
+                                </div>
+                            </div>
+                            <p class="text__prikaz__standart">{{ ps.min_trud_register }}</p>
+                        </div>
+                        <div class="col-xl-3 align-self-center">
+                            <div class="buttons__documents text-right">
+                                <a href="{{ ps.file.url }}" id="link-modal-{{ ps.pk }}" class="button__download__document" download="">Скачать</a>
+                                {% comment %} <a href="#" class="button__viev__document">Просмотреть</a>
+                                {% endcomment %}
+                                <button id="to-modal-{{ ps.pk }}" class="button__viev__document"
+                                    data-toggle="modal" data-target="#document_preview_modal">Просмотреть</button>
+                                 {% include 'mainapp/includes/document-preview-modal.html' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>

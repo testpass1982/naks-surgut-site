@@ -4,7 +4,7 @@ from django.utils.encoding import force_text
 from django.utils.html import format_html
 
 from .models import Post, Category, Tag, Document, DocumentCategory, PostPhoto, Article, Message, Contact
-from .models import Staff, Registry, SidePanel
+from .models import Staff, Registry, SidePanel, ProfStandard, Chunk
 # Register your models here.
 
 
@@ -121,6 +121,10 @@ class MessageAdmin(admin.ModelAdmin):
 class CantactAdmin(admin.ModelAdmin):
     list_display = ['title', 'description', 'number']
 
+# admin.site.register(Chunk)
+@admin.register(Chunk)
+class ChunkAdmin(admin.ModelAdmin):
+    list_display = ['title', 'html']
 
 admin.site.register(Tag)
 admin.site.register(Category)
@@ -128,3 +132,4 @@ admin.site.register(Staff)
 admin.site.register(Registry)
 admin.site.register(SidePanel)
 admin.site.register(DocumentCategory)
+admin.site.register(ProfStandard)

@@ -1,5 +1,5 @@
 from django import template
-from ..models import Post, Document
+from ..models import Post, Document, Chunk
 from django.urls import reverse
 # from django.shortcuts import get_object_or_404
 
@@ -40,4 +40,12 @@ def doc_title(url_code):
     except Document.DoesNotExist:
         title = 'Загрузите документ с кодом {}'.format(url_code)
     return title
+
+@register.simple_tag
+def chunk(chunk_code):
+    try:
+        chunk = Chunk.objects.get(code=chunk_code).html
+    except Chunk.DoesNotExist:
+        chunk = 'Создайте вставку с кодом {}'.format(chunk_code)
+    return chunk
 

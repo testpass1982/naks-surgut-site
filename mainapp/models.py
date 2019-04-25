@@ -283,3 +283,35 @@ class Registry(models.Model):
 
     def __str__(self):
         return self.title
+
+class ProfStandard(models.Model):
+    title = models.CharField(u'Название', max_length=64, blank=True)
+    code = models.CharField(u'Код', max_length=64, blank=True)
+    reg_number = models.CharField(u'Регистрационный номер', max_length=64, blank=True)
+    min_trud_register = models.CharField(u'Приказ минтруда', max_length=300, blank=True)
+    file = models.FileField(u'Файл', upload_to='upload/')
+    published_date = models.DateField(default=timezone.now())
+
+    class Meta:
+        verbose_name = 'Профессиональный стандарт'
+        verbose_name_plural = 'Профессиональные стандарты'
+
+    def __str__(self):
+        return self.title
+
+
+class Chunk(models.Model):
+    """class for making html chunks on pages"""
+    title = models.CharField(u'Название вставки', max_length=64)
+    code = models.CharField(u'Уникальный код вставки', max_length=64, default='КОД_ВСТАВКИ')
+    html = RichTextUploadingField(u'Форматирование вставки')
+
+    class Meta:
+        verbose_name = 'Вставка'
+        verbose_name_plural = 'Вставки'
+
+    def __str__(self):
+        return self.title
+
+
+

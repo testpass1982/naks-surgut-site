@@ -36,7 +36,8 @@ urlpatterns = [
     path('documents/', mainapp.documents, name="documents"),
     path('services/', mainapp.services, name="services"),
     path('about/', mainapp.about, name="about"),
-    path('reestr/<slug:type>', mainapp.reestrsp, name="reestr")
+    path('reestr/<slug:type>', mainapp.reestrsp, name="reestr"),
+    path('profstandards/', mainapp.profstandards, name="profstandards")
     # path('staff', mainapp.staff, name='staff')
 ]
 if settings.DEBUG:
