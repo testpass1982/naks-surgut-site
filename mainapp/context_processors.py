@@ -11,7 +11,7 @@ def document_categories(request):
 
 def service_descriptions(request):
     try:
-        service_pages = Post.objects.filter(service_description=True).order_by('-published_date')
+        service_pages = Post.objects.filter(service_description=True).order_by('number')
     except Post.DoesNotExist:
         service_pages = {'message': 'Добавьте страницу с описанием услуги'}
     if service_pages.count() == 0:
