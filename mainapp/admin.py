@@ -95,7 +95,7 @@ class PostAdmin(admin.ModelAdmin):
               'secondery_main', 'publish_on_news_page', ]
     readonly_fields = ['id', get_url]
     list_display = ['title', 'category', 'url_code',
-                    'published_page', 'publish_on_main_page', 'publish_on_news_page']
+                    'published_date', 'publish_on_main_page', 'publish_on_news_page']
     inlines = [PostPhotoInline, DocumentInline]
 
     def view_on_site(self, obj):
