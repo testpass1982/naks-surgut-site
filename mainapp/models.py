@@ -287,7 +287,7 @@ class Registry(models.Model):
         return self.title
 
 class ProfStandard(models.Model):
-    title = models.CharField(u'Название', max_length=64, blank=True)
+    title = models.CharField(u'Название', max_length=300, blank=True)
     code = models.CharField(u'Код', max_length=64, blank=True)
     reg_number = models.CharField(u'Регистрационный номер', max_length=64, blank=True)
     min_trud_register = models.CharField(u'Приказ минтруда', max_length=300, blank=True)
