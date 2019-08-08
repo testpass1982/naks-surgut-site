@@ -1,5 +1,5 @@
 {% extends 'mainapp/base.html' %}
-{% load static %}
+{% load static %}{% load link_holders %}
 
 {% block content %}
 
@@ -35,20 +35,20 @@
                   Телефон
                 </p>
                 <div class="line__for__text"></div>
-                <p class="text__adress__number">
-                  8 (3462) 21-53-42 <br> 8 (3462) 21-53-41
-                </p>
-              </div>
+                {% autoescape off %}
+                {% chunk 'PHONES' %}
+                {% endautoescape %}
+                </div>
               <div class="line__contact__after__text"></div>
               {% for contact in contacts %}
-              
+
               <div class="col-xl-6">
                 <p class="text__adress">
                   {{ contact.description }}
                 </p>
                 <p class="name__face__contact">
                   {{ contact.title }}
-                </p>                
+                </p>
               </div>
               <div class="col-xl-5">
                 <p class="text__adress">
@@ -57,7 +57,7 @@
                 <p class="contact__face">
                   {{ contact.phone }} <br>
                   {{ contact.email}}
-                </p>               
+                </p>
               </div>
               <div class="line__contact__after__text"></div>
               {% endfor %}
